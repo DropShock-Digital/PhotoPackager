@@ -1,0 +1,10 @@
+[
+  "tests/test_api.py::test_read_root",
+  "tests/test_api.py::test_submit_job_no_files",
+  "tests/test_api.py::test_submit_job_success",
+  "tests/test_download.py::test_download_file_not_found",
+  "tests/test_download.py::test_download_file_success",
+  "tests/test_mcp.py::test_mcp_placeholder",
+  "tests/test_status.py::test_job_status_pending",
+  "tests/test_status.py::test_job_status_success"
+]

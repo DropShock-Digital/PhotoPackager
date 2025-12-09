@@ -1,0 +1,2 @@
+"""PhotoPackager web application package."""
+

@@ -1,0 +1,6 @@
+{
+  "web_app/tests/test_api.py": true,
+  "web_app/tests/test_download.py": true,
+  "web_app/tests/test_mcp.py": true,
+  "web_app/tests/test_status.py": true
+}
