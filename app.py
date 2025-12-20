@@ -56,7 +56,7 @@ __version__ = "0.1.0-logging-debug"
 # --- Globals ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Use Desktop for crash log for easier access during debugging
-crash_log_path = os.path.join(os.path.expanduser('~/Desktop'), 'photopackager_crash.log')
+crash_log_path = os.path.join(os.getcwd(), 'photopackager_crash.log')
 
 # Ensure the log file directory exists (Desktop should always exist)
 # os.makedirs(os.path.dirname(crash_log_path), exist_ok=True)
