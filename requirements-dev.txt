@@ -1,2 +1,5 @@
-pytest==8.3.5
-black==25.1.0
+pytest
+pytest-asyncio
+httpx
+respx
+pytest-mock
