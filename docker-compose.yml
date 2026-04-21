@@ -6,10 +6,14 @@ services:
 
   web:
     build: .
-    working_dir: /app/..
-    command: uvicorn web_app.main:app --host 0.0.0.0 --port 8000
+    working_dir: /app
+    command: uvicorn main:app --host 0.0.0.0 --port 5601
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      REDIS_URL: redis://redis:6379/0
     ports:
-      - "8000:8000"
+      - "5601:5601"
     volumes:
       - ./outputs:/app/outputs
       - ./temp_uploads:/app/temp_uploads
@@ -18,8 +22,12 @@ services:
 
   worker:
     build: .
-    working_dir: /app/..
-    command: celery -A web_app.worker.celery_app worker --loglevel=info
+    working_dir: /app
+    command: celery -A worker.celery_app worker --loglevel=info
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      REDIS_URL: redis://redis:6379/0
     volumes:
       - ./outputs:/app/outputs
       - ./temp_uploads:/app/temp_uploads

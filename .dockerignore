@@ -1,0 +1,17 @@
+node_modules
+.venv
+.venv*
+venv*
+__pycache__
+*.pyc
+.pytest_cache
+.git
+frontend/node_modules
+outputs
+temp_uploads
+test_output.txt
+.github
+docs
+gui
+cli
+assets
