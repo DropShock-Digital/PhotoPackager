@@ -14,7 +14,7 @@ export function AnimatedBackground() {
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-amber-600/20 blur-[120px] rounded-full"
+                className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-sky-500/18 blur-[120px] rounded-full"
             />
             <motion.div
                 animate={{
@@ -27,7 +27,7 @@ export function AnimatedBackground() {
                     ease: "easeInOut",
                     delay: 1
                 }}
-                className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-orange-600/10 blur-[100px] rounded-full"
+                className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-blue-600/12 blur-[100px] rounded-full"
             />
             <motion.div
                 animate={{
@@ -40,7 +40,7 @@ export function AnimatedBackground() {
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute top-1/4 left-1/3 w-[40%] h-[40%] bg-amber-500/10 blur-[90px] rounded-full"
+                className="absolute top-1/4 left-1/3 w-[40%] h-[40%] bg-cyan-500/10 blur-[90px] rounded-full"
             />
         </div>
     )

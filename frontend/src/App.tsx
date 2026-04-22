@@ -188,9 +188,9 @@ function App() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-6 text-xs md:text-sm font-bold text-neutral-400">
-            <a href="https://dropshockdigital.com" target="_blank" rel="noreferrer" className="hover:text-sky-400 transition-colors hidden md:block">DropShock Digital</a>
+            <a href="https://www.dropshockdigital.com" target="_blank" rel="noreferrer" className="hover:text-sky-400 transition-colors hidden md:block">DropShock Digital</a>
             <a href="https://stevenseagondollar.com" target="_blank" rel="noreferrer" className="hover:text-sky-400 transition-colors hidden md:block">Steven Seagondollar</a>
-            <a href="https://github.com/DropShock-Digital" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full hover:bg-white/10">
+            <a href="https://github.com/DropShock-Digital/PhotoPackager" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-full hover:bg-white/10">
               <Github className="w-4 h-4" />
               <span className="hidden sm:block">GitHub</span>
             </a>

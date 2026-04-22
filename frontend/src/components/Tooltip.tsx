@@ -32,7 +32,7 @@ export function Tooltip({ children, content, side = 'top' }: TooltipProps) {
               ${side === 'left' ? 'right-full mr-2' : ''}
             `}
                     >
-                        <div className="absolute inset-0 bg-amber-500/5 rounded-xl -z-10" />
+                        <div className="absolute inset-0 bg-sky-500/5 rounded-xl -z-10" />
                         {content}
                     </motion.div>
                 )}

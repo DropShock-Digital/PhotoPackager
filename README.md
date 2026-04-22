@@ -1,18 +1,18 @@
 <div align="center">
-  <img src="assets/PhotoPackager_Patch_Design.png" alt="PhotoPackager Logo" width="400" style="margin-bottom:10px;"/>
+  <img src="assets/PhotoPackager_Patch_Design_1024.png" alt="PhotoPackager Logo" width="400" style="margin-bottom:10px;"/>
   <h1>PhotoPackager</h1>
   <h3 align="center" style="font-weight: normal; margin-top: -10px; margin-bottom: 10px;">Make Photoshoots Client Accessible</h3>
   <p><strong>A Creative Photoshoot Pipeline Tool By <a href="https://www.dropshockdigital.com" target="_blank" rel="noopener noreferrer">Steven Seagondollar, DropShock Digital LLC</a></strong></p>
   <br>
   <a href="https://www.dropshockdigital.com" target="_blank" rel="noopener noreferrer">
-    <img src="assets/(White) DropShock Digital - Photography Watermark Version 2.png" alt="DropShock Digital - Creators for Creators" width="350" style="margin-top: 5px; margin-bottom: 20px;"/>
+    <img src="assets/PhotoPackager_Patch.png" alt="DropShock Digital - Creators for Creators" width="350" style="margin-top: 5px; margin-bottom: 20px;"/>
   </a>
   <p>
   <br>
     <a href="LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"/></a>
     <a href="https://www.python.org/downloads/release/python-31210/"><img src="https://img.shields.io/badge/python-3.12.10-blue.svg" alt="Python 3.12.10+"/></a>
-    <a href="https://github.com/seagpt/PhotoPackager/releases/latest"><img src="https://img.shields.io/github/v/release/seagpt/PhotoPackager?label=latest%20version&sort=semver&color=blueviolet" alt="Latest Release"/></a>
-    <a href="https://github.com/seagpt/PhotoPackager/releases"><img src="https://img.shields.io/github/downloads/seagpt/PhotoPackager/total?label=downloads&color=brightgreen" alt="Total Downloads"/></a>
+    <a href="https://github.com/DropShock-Digital/PhotoPackager/releases/latest"><img src="https://img.shields.io/github/v/release/DropShock-Digital/PhotoPackager?label=latest%20version&sort=semver&color=blueviolet" alt="Latest Release"/></a>
+    <a href="https://github.com/DropShock-Digital/PhotoPackager/releases"><img src="https://img.shields.io/github/downloads/DropShock-Digital/PhotoPackager/total?label=downloads&color=brightgreen" alt="Total Downloads"/></a>
   </p>
 </div>
 
@@ -23,13 +23,13 @@
 Download the first official version of PhotoPackager for your operating system:
 
 *   🪟 **Windows:**
-    *   [**PhotoPackager Installer (v1.0.0) (.exe)**](https://github.com/seagpt/PhotoPackager/releases/download/v1.0.0/PhotoPackager_GUI_Installer.exe) <!-- Ensure this link points to your actual v1.0.0 EXE asset -->
+    *   [**PhotoPackager Installer (v1.0.0) (.exe)**](https://github.com/DropShock-Digital/PhotoPackager/releases/download/v1.0.0/PhotoPackager_GUI_Installer.exe) <!-- Ensure this link points to your actual v1.0.0 EXE asset -->
 *   🍎 **macOS:**
-    *   [**PhotoPackager Universal (v1.0.0) (.dmg.zip)**](https://github.com/seagpt/PhotoPackager/releases/download/v1.0.0/PhotoPackager_GUI.dmg.zip) <!-- Ensure this link points to your actual v1.0.0 ZIPPED DMG asset -->
+    *   [**PhotoPackager Universal (v1.0.0) (.dmg.zip)**](https://github.com/DropShock-Digital/PhotoPackager/releases/download/v1.0.0/PhotoPackager_GUI.dmg.zip) <!-- Ensure this link points to your actual v1.0.0 ZIPPED DMG asset -->
         *(The macOS Disk Image (`.dmg`) is provided within a `.zip` archive. This is to help ensure smoother downloads and prevent potential security blocks by web browsers or macOS Gatekeeper that can sometimes occur with direct `.dmg` downloads from sources like GitHub.)*
 
 <div align="center" style="margin-top:10px; font-size:0.9em;">
-  <em>For all versions, including future updates, pre-releases, or older builds, please visit the <a href="https://github.com/seagpt/PhotoPackager/releases" target="_blank" rel="noopener noreferrer"><strong>Official PhotoPackager Releases Page</strong></a>.</em>
+  <em>For all versions, including future updates, pre-releases, or older builds, please visit the <a href="https://github.com/DropShock-Digital/PhotoPackager/releases" target="_blank" rel="noopener noreferrer"><strong>Official PhotoPackager Releases Page</strong></a>.</em>
 </div>
 
 ---
@@ -39,7 +39,7 @@ Download the first official version of PhotoPackager for your operating system:
     <tr>
       <td style="padding: 15px; border: none; vertical-align: top; text-align: center;">
         <figure style="margin: 0 auto;">
-          <img src="assets/mac_app.png" alt="PhotoPackager macOS Screenshot" width="480" style="border: 2px solid #6c757d; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
+          <img src="assets/PhotoPackager_Patch.png" alt="PhotoPackager macOS Screenshot" width="480" style="border: 2px solid #6c757d; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"/>
           <br>
           <figcaption style="font-size: 0.95em; color: #555; margin-top: 12px;"><em>PhotoPackager efficiently managing photo deliveries on macOS.</em></figcaption>
         </figure>
@@ -198,7 +198,7 @@ This method avoids the need for Python installation or manual dependency managem
 PhotoPackager for Windows is provided as an `.exe` installer file, which will guide you through a standard software installation process.
 
 1.  **Download the Installer:**
-    *   Navigate to the [Official PhotoPackager Releases Page on GitHub](https://github.com/seagpt/PhotoPackager/releases/latest).
+    *   Navigate to the [Official PhotoPackager Releases Page on GitHub](https://github.com/DropShock-Digital/PhotoPackager/releases/latest).
     *   Download the `PhotoPackager_GUI_Installer.exe` file for the latest version (or the specific version v1.0.0 for this initial launch). Save it to a convenient location on your computer, such as your `Downloads` folder.
 2.  **Run the Installer Program:**
     *   Locate the downloaded `PhotoPackager_GUI_Installer.exe` file and double-click it to start the installation wizard.
@@ -218,7 +218,7 @@ PhotoPackager for Windows is provided as an `.exe` installer file, which will gu
 PhotoPackager for macOS is distributed as an Apple Disk Image (`.dmg`) file. To ensure smoother downloads from platforms like GitHub and to help prevent potential security blocks by web browsers or macOS's Gatekeeper feature that can sometimes occur with direct `.dmg` downloads, the `.dmg` file itself is packaged within a `.zip` archive.
 
 1.  **Download and Unzip the Archive:**
-    *   Go to the [Official PhotoPackager Releases Page on GitHub](https://github.com/seagpt/PhotoPackager/releases/latest).
+    *   Go to the [Official PhotoPackager Releases Page on GitHub](https://github.com/DropShock-Digital/PhotoPackager/releases/latest).
     *   Download the `PhotoPackager_GUI.dmg.zip` file for the latest version (or version v1.0.0 for this initial launch). Save it to your `Downloads` folder or another preferred location.
     *   Once the download is complete, locate the `PhotoPackager_GUI.dmg.zip` file and double-click it. Your Mac's built-in Archive Utility (or another unzipping tool you might have, like The Unarchiver) should automatically extract its contents. This will result in a file named `PhotoPackager_GUI.dmg` appearing in the same folder.
 2.  **Mount the Disk Image & Install the Application:**
@@ -263,7 +263,7 @@ If you are a developer, wish to contribute to the PhotoPackager project, want to
 2.  **Get the PhotoPackager Source Code from GitHub:**
     Open your system's terminal or command prompt application. Navigate (using the `cd` command, which stands for "change directory") to the parent directory on your computer where you would like to store the PhotoPackager project files (e.g., a `Projects` or `Development` folder in your user directory). Once you are in your desired parent directory, clone the PhotoPackager repository from GitHub using the following `git clone` command:
     ```bash
-    git clone https://github.com/seagpt/PhotoPackager.git
+    git clone https://github.com/DropShock-Digital/PhotoPackager.git
     ```
     This command will connect to GitHub, download all the project's source code files, history, and branches, and create a new folder in your current location named `PhotoPackager`. After the cloning process is complete (it might take a few moments depending on your internet speed and repository size), navigate into this newly created project directory:
     ```bash
@@ -365,7 +365,7 @@ For experienced Python developers who want to quickly get the PhotoPackager sour
 
 1.  Clone the repository from GitHub and navigate into the project directory:
     ```bash
-    git clone https://github.com/seagpt/PhotoPackager.git && cd PhotoPackager
+    git clone https://github.com/DropShock-Digital/PhotoPackager.git && cd PhotoPackager
     ```
 2.  Create and activate a Python 3.12.x virtual environment (you can choose your preferred venv name):
     ```bash
@@ -803,7 +803,7 @@ If you are a Python developer and plan to contribute to PhotoPackager's ongoing 
     *   Ensure you have **Python 3.12.10** (or a compatible 3.12.x release for current development) and **Git** installed on your system. (Refer to the "Method 2: Running from Source" part of the main "Installation" section above for more details on obtaining these if you haven't already).
     *   Clone the PhotoPackager source code repository from GitHub to your local machine:
         ```bash
-        git clone https://github.com/seagpt/PhotoPackager.git
+        git clone https://github.com/DropShock-Digital/PhotoPackager.git
         cd PhotoPackager  # Navigate into the newly cloned project directory
         ```
 
@@ -853,7 +853,7 @@ If you are a Python developer and plan to contribute to PhotoPackager's ongoing 
             *   `main_window.py` (or a similarly named module like `app_window.py`): This module typically defines the main application window class (often a subclass of PySide6's `QMainWindow` or `QWidget`). It's responsible for setting up the main window's layout, instantiating all the UI widgets (like buttons, text input fields, dropdown menus, progress bars, log display areas), and connecting user interactions (such as button clicks, text changes, or menu selections) to the appropriate event handling logic (slots or methods).
             *   Other Python files for specific dialog windows used by the application (e.g., `about_dialog.py` for the "About PhotoPackager" window, `settings_dialog.py` if there's a separate settings configuration window, `log_viewer_dialog.py` if there's a dedicated window to show detailed logs, `update_checker.py` if the application has an update checking feature that presents a dialog).
         *   `assets/` (Directory): This directory contains static application assets that are not Python code but are needed by the application. These might include:
-            *   Application logos and branding images (like `PhotoPackager_Patch_Design.png`, `(White) DropShock Digital - Photography Watermark Version 2.png`).
+*   Application logos and branding images (like `PhotoPackager_Patch_Design_1024.png` and `PhotoPackager_Patch.png`).
             *   Icons used within the GUI for buttons or other elements, or for the application executable/bundle itself (e.g., `.ico` files for Windows, `.icns` files for macOS).
             *   UI elements like custom background images (e.g., an image named `dmg_background.png` might be used if creating a custom-styled macOS DMG installer).
             *   A subfolder, often named `assets/test_images/`, for storing a collection of small, representative sample images. These are crucial for running the automated test suite to ensure that image processing functions work correctly with real-world file types and data.
@@ -1008,7 +1008,7 @@ Your experience with PhotoPackager is very important to us at DropShock Digital 
 
 *   **🐙 GitHub Issues (The official platform for public bug tracking, feature requests & community discussion):**
     The project's GitHub Issues page is the official and preferred place to report bugs that other users might also encounter, to request new features or enhancements you'd like to see, and to engage in discussions about technical aspects or potential improvements for PhotoPackager:
-    [https://github.com/seagpt/PhotoPackager/issues](https://github.com/seagpt/PhotoPackager/issues)
+    [https://github.com/DropShock-Digital/PhotoPackager/issues](https://github.com/DropShock-Digital/PhotoPackager/issues)
     *   ***Before submitting a new issue:*** Please take a moment to search through the existing open and closed issues on the GitHub page. It's possible that your problem or suggestion has already been discussed, reported, or even resolved. This helps avoid duplicate efforts and keeps the issue tracker organized.
     *   ***When reporting a bug:*** Please provide as much detail as possible. Refer to the checklist at the end of the "Troubleshooting / FAQ" section for a list of helpful information to include in your bug report (such as OS version, PhotoPackager version, steps to reproduce, log files, screenshots, etc.).
 

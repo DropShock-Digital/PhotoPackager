@@ -33,7 +33,7 @@ export function FounderModal({ isOpen, onClose }: FounderModalProps) {
                         <div className="flex items-center justify-between p-8 border-b border-white/5 sticky top-0 bg-neutral-900/95 backdrop-blur z-20">
                             <div>
                                 <h2 className="text-2xl font-bold text-white">The Founder</h2>
-                                <p className="text-amber-500 font-bold uppercase tracking-widest text-xs">A Note from the Developer</p>
+                                <p className="text-sky-400 font-bold uppercase tracking-widest text-xs">A Note from the Founder</p>
                             </div>
                             <button
                                 onClick={onClose}
@@ -48,23 +48,23 @@ export function FounderModal({ isOpen, onClose }: FounderModalProps) {
                             <div className="grid md:grid-cols-12 gap-12 items-start">
                                 {/* Profile */}
                                 <div className="md:col-span-4 flex flex-col items-center text-center">
-                                    <div className="w-40 h-40 rounded-full bg-neutral-800 border-4 border-amber-500/20 overflow-hidden shadow-2xl mb-6 relative group">
+                                    <div className="w-40 h-40 rounded-full bg-neutral-800 border-4 border-sky-500/20 overflow-hidden shadow-2xl mb-6 relative group">
                                         <div className="absolute inset-0 bg-neutral-800 flex items-center justify-center text-neutral-600">
                                             <span className="text-xs uppercase font-bold tracking-widest">Photo Placeholder</span>
                                         </div>
                                         <img src="/SS_Suit_Backdrop.jpg" alt="Steven Seagondollar" className="w-full h-full object-cover relative z-10" />
                                     </div>
                                     <h3 className="text-xl font-bold text-white mb-1">Steven Seagondollar</h3>
-                                    <p className="text-xs text-amber-500 font-bold uppercase tracking-widest mb-6">Founder, DropShock Digital</p>
+                                    <p className="text-xs text-sky-400 font-bold uppercase tracking-widest mb-6">Founder, DropShock Digital</p>
 
                                     <div className="flex gap-4">
-                                        <a href="https://www.linkedin.com/in/stevenseagondollar/" target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-amber-500 hover:text-white transition-colors text-neutral-400">
+                                        <a href="https://www.linkedin.com/in/stevenseagondollar/" target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-sky-500 hover:text-white transition-colors text-neutral-400">
                                             <Linkedin className="w-5 h-5" />
                                         </a>
-                                        <a href="mailto:steven.seagondollar@dropshockdigital.com" className="p-2 bg-white/5 rounded-full hover:bg-amber-500 hover:text-white transition-colors text-neutral-400">
+                                        <a href="mailto:steven.seagondollar@dropshockdigital.com" className="p-2 bg-white/5 rounded-full hover:bg-sky-500 hover:text-white transition-colors text-neutral-400">
                                             <Mail className="w-5 h-5" />
                                         </a>
-                                        <a href="https://stevenseagondollar.com" target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-amber-500 hover:text-white transition-colors text-neutral-400">
+                                        <a href="https://stevenseagondollar.com" target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-sky-500 hover:text-white transition-colors text-neutral-400">
                                             <Globe className="w-5 h-5" />
                                         </a>
                                     </div>
@@ -74,10 +74,10 @@ export function FounderModal({ isOpen, onClose }: FounderModalProps) {
                                 <div className="md:col-span-8 space-y-6">
                                     <div className="prose prose-invert prose-neutral max-w-none text-neutral-300 leading-relaxed space-y-6 italic border-l-2 border-white/10 pl-6">
                                         <p>
-                                            This tool began as a necessity, not a product. In a previous role, I was tasked with a massive challenge. I had to analyze years' worth of enterprise sales data. I needed to review the full transcripts of every multi-hour sales call we had ever conducted to find the root causes of success. Standard tools failed—they could only <strong>search</strong> the calls (RAG), but I needed an AI to <strong>reason</strong> across all of them (CAG) to find the patterns. I wrote a parsing script to chop the data for ChatGPT, and that script evolved into LMTokenCook.
+                                            PhotoPackager grew out of a very practical need: after a shoot, I wanted a cleaner way to hand off files without spending the evening resizing, renaming, and sorting the same folders by hand.
                                         </p>
                                         <p>
-                                            At DropShock Digital, my goal isn't just to build software. It is to ensure my clients achieve the best production results. If you are comfortable with less than friendly WebUIs, I highly recommend using <strong>Google AI Studio</strong> since it natively supports massive context. However, for those who prefer the standard ChatGPT workflow, have a strictly limited API budget, or need to process sensitive data offline before it touches the web, LMTokenCook remains the essential bridge.
+                                            The goal here is straightforward: keep the process dependable, keep the output organized, and make the delivery feel professional for the client without pretending the app does more than it actually does.
                                         </p>
                                     </div>
                                 </div>
