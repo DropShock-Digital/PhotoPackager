@@ -60,11 +60,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     </div>
 
                     <p className="text-lg md:text-2xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-                        Package a finished shoot into originals, optimized files, compressed previews, and a branded README.txt.
-                    </p>
-
-                    <p className="mt-6 text-sm md:text-base text-neutral-500 max-w-3xl mx-auto leading-relaxed">
-                        Built for clean handoffs, lighter downloads, and less folder work.
+                        Package shoots for delivery.
                     </p>
 
                     <div className="flex items-center justify-center mt-10">
@@ -109,7 +105,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     <div className="mb-16 text-center max-w-4xl mx-auto">
                         <span className="text-xs font-bold text-sky-400 tracking-[0.2em] uppercase block mb-3">What the app does</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
-                            Repeatable delivery.
+                            Package Photoshoots for Client Download
                         </h2>
                         <p className="text-lg text-neutral-400 leading-relaxed">
                             Organize, convert, compress, and package without the handwork.
