@@ -28,6 +28,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     transition={{ duration: 0.8 }}
                     className="w-full"
                 >
+                    <div className="absolute left-1/2 top-52 -translate-x-1/2 w-[34rem] h-[34rem] bg-sky-500/10 blur-[140px] rounded-full pointer-events-none" />
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -35,18 +36,18 @@ export function LandingPage({ onStart }: LandingPageProps) {
                         className="mb-8 flex justify-center"
                     >
                         <div className="relative">
-                            <div className="absolute inset-0 rounded-[2rem] bg-sky-500/15 blur-3xl" />
+                            <div className="absolute inset-0 rounded-[2rem] bg-sky-500/25 blur-3xl" />
                             <img
-                                src="/PhotoPackager_Patch_Design_1024.png"
+                                src="/PhotoPackager_Patch.png"
                                 alt="PhotoPackager logo"
-                                className="relative w-44 h-44 md:w-52 md:h-52 rounded-[2rem] border border-white/10 shadow-[0_0_60px_rgba(14,165,233,0.18)] object-cover"
+                                className="relative w-44 h-44 md:w-52 md:h-52 rounded-[2rem] object-contain"
                             />
                         </div>
                     </motion.div>
 
                     <div className="relative max-w-5xl mx-auto">
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-sky-500/10 via-cyan-400/15 to-blue-500/10 blur-3xl -z-10"
+                            className="absolute inset-0 bg-gradient-to-r from-sky-500/15 via-cyan-400/20 to-blue-500/15 blur-3xl -z-10"
                             animate={{ opacity: [0.5, 0.8, 0.5] }}
                             transition={{ duration: 5, repeat: Infinity }}
                         />
@@ -59,26 +60,20 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     </div>
 
                     <p className="text-lg md:text-2xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-                        PhotoPackager turns a finished shoot into organized delivery folders with originals, optimized JPEG/WebP files, compressed previews, and a client README.txt.
+                        Package a finished shoot into originals, optimized files, compressed previews, and a branded README.txt.
                     </p>
 
                     <p className="mt-6 text-sm md:text-base text-neutral-500 max-w-3xl mx-auto leading-relaxed">
-                        Built for photographers and studios that want a repeatable handoff without hand-sorting every file.
+                        Built for clean handoffs, lighter downloads, and less folder work.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+                    <div className="flex items-center justify-center mt-10">
                         <button
                             onClick={onStart}
-                            className="group inline-flex items-center gap-3 px-8 py-5 bg-white text-black rounded-full font-bold text-lg hover:bg-neutral-200 transition-all shadow-[0_0_50px_rgba(255,255,255,0.18)] hover:scale-[1.02] active:scale-[0.98]"
+                            className="group inline-flex items-center gap-3 px-8 py-5 rounded-full font-semibold text-lg border border-sky-400/20 bg-sky-500/12 text-sky-50 shadow-[0_0_40px_rgba(14,165,233,0.12)] hover:bg-sky-500/16 hover:border-sky-400/30 transition-all hover:scale-[1.01] active:scale-[0.98]"
                         >
                             <img src="/PhotoPackager_Icon.png" alt="" aria-hidden="true" className="w-8 h-8 object-contain" />
-                            <span>Build a Client Delivery</span>
-                        </button>
-                        <button
-                            onClick={() => setLogicOpen(true)}
-                            className="inline-flex items-center gap-3 px-7 py-5 rounded-full border border-white/10 bg-white/5 text-white font-semibold hover:bg-white/10 transition-colors"
-                        >
-                            See the workflow <ArrowRight className="w-4 h-4" />
+                            <span>Package Client Delivery</span>
                         </button>
                     </div>
 
@@ -104,9 +99,9 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     transition={{ delay: 1, duration: 2, repeat: Infinity, times: [0, 0.5, 1], ease: 'easeInOut' }}
                     className="absolute bottom-6 flex flex-col items-center gap-2 cursor-pointer text-white/20 hover:text-white transition-colors"
                 >
-                    <span className="text-[10px] uppercase tracking-[0.2em]">Scroll to learn more</span>
-                    <ArrowDown className="w-5 h-5" />
-                </motion.div>
+                        <span className="text-[10px] uppercase tracking-[0.2em]">Scroll to learn more</span>
+                        <ArrowDown className="w-5 h-5" />
+                    </motion.div>
             </header>
 
             <section className="py-24 bg-black relative z-10">
@@ -114,10 +109,10 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     <div className="mb-16 text-center max-w-4xl mx-auto">
                         <span className="text-xs font-bold text-sky-400 tracking-[0.2em] uppercase block mb-3">What the app does</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
-                            Repeatable delivery without the repetitive work.
+                            Repeatable delivery.
                         </h2>
                         <p className="text-lg text-neutral-400 leading-relaxed">
-                            The README describes a simple pattern: organize the shoot, generate the right file types, handle metadata intentionally, and package the result in a way the client can actually use.
+                            Organize, convert, compress, and package without the handwork.
                         </p>
                     </div>
 
@@ -127,12 +122,12 @@ export function LandingPage({ onStart }: LandingPageProps) {
                             <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center mb-6 text-sky-400">
                                 <Camera className="w-6 h-6" />
                             </div>
-                            <h3 className="text-xl font-bold mb-3">Keep the shoot organized</h3>
+                            <h3 className="text-xl font-bold mb-3">Organize the shoot</h3>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-                                Start from the original photos, choose a shoot base name, and let PhotoPackager handle the folder structure instead of creating it by hand.
+                                Start from the originals and let the app build the folder structure for you.
                             </p>
                             <ul className="text-xs text-neutral-500 space-y-2">
-                                <li className="flex items-center gap-2"><div className="w-1 h-1 bg-sky-500 rounded-full" /> Copy or move originals with care</li>
+                                <li className="flex items-center gap-2"><div className="w-1 h-1 bg-sky-500 rounded-full" /> Copy or move with care</li>
                                 <li className="flex items-center gap-2"><div className="w-1 h-1 bg-sky-500 rounded-full" /> Predictable output folders</li>
                             </ul>
                         </div>
@@ -144,7 +139,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                             </div>
                             <h3 className="text-xl font-bold mb-3">Create the right formats</h3>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-                                Generate optimized JPG or WebP deliverables, or compressed versions when you need smaller files for galleries, previews, or quick sharing.
+                                Generate optimized JPG or WebP deliverables, or compressed versions for lighter sharing.
                             </p>
                             <ul className="text-xs text-neutral-500 space-y-2">
                                 <li className="flex items-center gap-2"><div className="w-1 h-1 bg-cyan-500 rounded-full" /> Quality settings stay configurable</li>
@@ -157,9 +152,9 @@ export function LandingPage({ onStart }: LandingPageProps) {
                             <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-6 text-blue-400">
                                 <Package className="w-6 h-6" />
                             </div>
-                            <h3 className="text-xl font-bold mb-3">Deliver a client-ready package</h3>
+                            <h3 className="text-xl font-bold mb-3">Deliver the package</h3>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-                                Bundle the output into a polished handoff with ZIP archives and a README.txt that carries your studio details and support contact.
+                                Bundle the job into ZIP archives with a README.txt that carries your studio details.
                             </p>
                             <ul className="text-xs text-neutral-500 space-y-2">
                                 <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full" /> Branding included in the package</li>
@@ -183,7 +178,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                             <h3 className="text-2xl font-bold text-white mb-2">Keep Originals</h3>
                             <p className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-6">Copy by default</p>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                                Protect the source shoot by copying files into the package unless you explicitly choose a more aggressive workflow.
+                                Keep the source shoot intact unless you explicitly choose otherwise.
                             </p>
                             <div className="mt-auto">
                                 <button
@@ -205,7 +200,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                             <h3 className="text-2xl font-bold text-white mb-2">Multiple Formats</h3>
                             <p className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-6">JPEG and WebP</p>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                                Generate optimized and compressed versions from the same job, so every delivery can match the use case instead of forcing one size for everything.
+                                Generate optimized and compressed versions for galleries, previews, and quick sharing.
                             </p>
                             <div className="mt-auto">
                                 <button
@@ -227,7 +222,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                             <h3 className="text-2xl font-bold text-white mb-2">The Founder</h3>
                             <p className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-6">Built from real post-shoot work</p>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                                PhotoPackager came from the desire to turn a finished shoot into a clean delivery without doing the same folder work twice.
+                                PhotoPackager came from the desire to turn a finished shoot into a clean delivery without repeating the same folder work twice.
                             </p>
                             <div className="mt-auto">
                                 <button
