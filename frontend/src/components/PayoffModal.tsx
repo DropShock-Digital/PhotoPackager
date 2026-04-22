@@ -32,8 +32,8 @@ export function PayoffModal({ isOpen, onClose }: PayoffModalProps) {
                         {/* Header */}
                         <div className="flex items-center justify-between p-8 border-b border-white/5 sticky top-0 bg-neutral-900/95 backdrop-blur z-20">
                             <div>
-                                <h2 className="text-2xl font-bold text-white">The Payoff</h2>
-                                <p className="text-amber-500 font-bold uppercase tracking-widest text-xs">Context Augmented Generation</p>
+                                <h2 className="text-2xl font-bold text-white">The Workflow</h2>
+                                <p className="text-sky-400 font-bold uppercase tracking-widest text-xs">PhotoPackager at a glance</p>
                             </div>
                             <button
                                 onClick={onClose}
@@ -47,35 +47,35 @@ export function PayoffModal({ isOpen, onClose }: PayoffModalProps) {
                         <div className="p-8 md:p-12">
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
                                 <div className="space-y-4">
-                                    <h4 className="font-bold text-white text-lg border-b border-white/10 pb-2">Deep Reasoning</h4>
-                                    <ul className="text-xs text-neutral-400 space-y-3 list-disc pl-4 marker:text-amber-500">
-                                        <li>True reasoning requires global context. The AI "reads" the whole book, rather than searching for keywords.</li>
-                                        <li>Identify hidden trends and correlations scattered across hundreds of separate files.</li>
-                                        <li>Eliminate "Lossy Summarization" by feeding raw source material directly.</li>
+                                    <h4 className="font-bold text-white text-lg border-b border-white/10 pb-2">Originals</h4>
+                                    <ul className="text-xs text-neutral-400 space-y-3 list-disc pl-4 marker:text-sky-500">
+                                        <li>Keep the original shoot intact by copying or moving files according to the job settings you choose.</li>
+                                        <li>Generate optimized JPG and WebP deliverables for professional digital handoff.</li>
+                                        <li>Use the same workflow every time so the output structure stays predictable for you and the client.</li>
                                     </ul>
                                 </div>
                                 <div className="space-y-4">
-                                    <h4 className="font-bold text-white text-lg border-b border-white/10 pb-2">Better Code</h4>
-                                    <ul className="text-xs text-neutral-400 space-y-3 list-disc pl-4 marker:text-amber-500">
-                                        <li>Refactor complex architectures by letting the AI see cyclic dependencies across the full stack.</li>
-                                        <li>Generate integration tests that accurately reflect the logic of the entire repository.</li>
-                                        <li>Standardize coding patterns across legacy and modern directories simultaneously.</li>
+                                    <h4 className="font-bold text-white text-lg border-b border-white/10 pb-2">Delivery Formats</h4>
+                                    <ul className="text-xs text-neutral-400 space-y-3 list-disc pl-4 marker:text-sky-500">
+                                        <li>Build client-ready folders without manual renaming, sorting, or rechecking every file.</li>
+                                        <li>Choose compressed versions when you need lighter delivery sets for web or sharing.</li>
+                                        <li>Save time on repetitive post-shoot prep and spend more time on the actual photography work.</li>
                                     </ul>
                                 </div>
                                 <div className="space-y-4">
-                                    <h4 className="font-bold text-white text-lg border-b border-white/10 pb-2">Coherent Writing</h4>
-                                    <ul className="text-xs text-neutral-400 space-y-3 list-disc pl-4 marker:text-amber-500">
-                                        <li>Feed 300+ pages of prior chapters to ensure perfect character voice consistency.</li>
-                                        <li>Detect plot holes or timeline contradictions that span across multiple volumes.</li>
-                                        <li>Maintain distinct thematic tone without the AI drifting into generic tropes.</li>
+                                    <h4 className="font-bold text-white text-lg border-b border-white/10 pb-2">Branding</h4>
+                                    <ul className="text-xs text-neutral-400 space-y-3 list-disc pl-4 marker:text-sky-500">
+                                        <li>Carry the studio name, website, and support email into the generated client README.</li>
+                                        <li>Keep metadata handling intentional with preserve or strip options instead of guessing.</li>
+                                        <li>Match the delivery style to the job instead of forcing one format for every use case.</li>
                                     </ul>
                                 </div>
                                 <div className="space-y-4">
-                                    <h4 className="font-bold text-white text-lg border-b border-white/10 pb-2">Complete Answers</h4>
-                                    <ul className="text-xs text-neutral-400 space-y-3 list-disc pl-4 marker:text-amber-500">
-                                        <li>Force the AI to answer based <em>only</em> on your provided data, reducing hallucination.</li>
-                                        <li>Get nuanced answers that consider the "long-tail" details of your documents.</li>
-                                        <li>Save money by utilizing the flat-fee Web UI for heavy-lifting analysis.</li>
+                                    <h4 className="font-bold text-white text-lg border-b border-white/10 pb-2">Practical Handoff</h4>
+                                    <ul className="text-xs text-neutral-400 space-y-3 list-disc pl-4 marker:text-sky-500">
+                                        <li>Produce the files clients can actually use instead of just the files the camera produced.</li>
+                                        <li>Deliver a shoot as a consistent package rather than a loose folder of images.</li>
+                                        <li>Keep the handoff practical, branded, and easy to understand.</li>
                                     </ul>
                                 </div>
                             </div>

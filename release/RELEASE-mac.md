@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="assets/PhotoPackager_Patch_Design.png" alt="PhotoPackager Logo" width="400" style="margin-bottom:10px;"/>
+  <img src="assets/PhotoPackager_Patch_Design_1024.png" alt="PhotoPackager Logo" width="400" style="margin-bottom:10px;"/>
   <h1>PhotoPackager for macOS</h1>
   <p><strong>Version 1.0.0 (Initial Release)</strong></p>
   <p><strong>by <a href="https://www.dropshockdigital.com" target="_blank" rel="noopener noreferrer">Steven Seagondollar, DropShock Digital LLC</a></strong></p>
   <a href="https://www.dropshockdigital.com" target="_blank" rel="noopener noreferrer">
-    <img src="assets/(White) DropShock Digital - Photography Watermark Version 2.png" alt="DropShock Digital - Creators for Creators" width="280" style="margin-top: 5px; margin-bottom: 15px;"/>
+    <img src="assets/PhotoPackager_Patch.png" alt="DropShock Digital - Creators for Creators" width="280" style="margin-top: 5px; margin-bottom: 15px;"/>
   </a>
 </div>
 

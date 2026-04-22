@@ -68,8 +68,8 @@ def resource_path(relative_path):
     return os.path.join(os.path.dirname(os.path.dirname(__file__)), relative_path)
 
 
-LOGO_PATH = resource_path("assets/PhotoPackager_Patch_Design.png")
-GITHUB_URL = "https://github.com/seagpt/PhotoPackager"
+LOGO_PATH = resource_path("assets/PhotoPackager_Patch_Design_1024.png")
+GITHUB_URL = "https://github.com/DropShock-Digital/PhotoPackager"
 
 
 class JobThread(QObject):

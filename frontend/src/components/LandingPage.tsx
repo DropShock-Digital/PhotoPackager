@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
-import { AnimatedBackground } from './AnimatedBackground';
 import { useState } from 'react';
-import { Shield, Database, FileCode, Zap, ArrowDown, BookOpen, AlertTriangle, ArrowRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, BookOpen, Camera, FileImage, Github, Package, Shield, Zap } from 'lucide-react';
+import { AnimatedBackground } from './AnimatedBackground';
+import { FounderModal } from './FounderModal';
 import { LegalModal } from './LegalModal';
 import { LogicModal } from './LogicModal';
 import { PayoffModal } from './PayoffModal';
-import { FounderModal } from './FounderModal';
 
 interface LandingPageProps {
     onStart: () => void;
@@ -17,286 +17,240 @@ export function LandingPage({ onStart }: LandingPageProps) {
     const [payoffOpen, setPayoffOpen] = useState(false);
     const [founderOpen, setFounderOpen] = useState(false);
 
-
-
-
     return (
-        <div className="min-h-screen bg-black text-white font-sans selection:bg-amber-500/30 selection:text-amber-200 overflow-x-hidden">
-            {/* Dynamic Background */}
+        <div className="min-h-screen bg-black text-white font-sans selection:bg-sky-500/30 selection:text-sky-100 overflow-x-hidden">
             <AnimatedBackground />
 
-
-
-            {/* Fullscreen Hero */}
-            <header className="relative min-h-screen py-32 flex flex-col items-center justify-center text-center px-6 max-w-7xl mx-auto z-10">
+            <header className="relative min-h-screen py-28 flex flex-col items-center justify-center text-center px-6 max-w-7xl mx-auto z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
+                    className="w-full"
                 >
-
-
-                    {/* Logo Patch */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.2, duration: 0.5 }}
+                        transition={{ delay: 0.1, duration: 0.5 }}
                         className="mb-8 flex justify-center"
                     >
-                        {/* Placeholder for PhotoPackager Logo */}
-                        <div className="w-48 h-48 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center drop-shadow-[0_0_30px_rgba(56,189,248,0.3)]">
-                            <Zap className="w-24 h-24 text-blue-400" />
+                        <div className="relative">
+                            <div className="absolute inset-0 rounded-[2rem] bg-sky-500/15 blur-3xl" />
+                            <img
+                                src="/PhotoPackager_Patch_Design_1024.png"
+                                alt="PhotoPackager logo"
+                                className="relative w-44 h-44 md:w-52 md:h-52 rounded-[2rem] border border-white/10 shadow-[0_0_60px_rgba(14,165,233,0.18)] object-cover"
+                            />
                         </div>
                     </motion.div>
 
-                    {/* Animated Text Background */}
-                    <div className="relative">
+                    <div className="relative max-w-5xl mx-auto">
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-blue-500/20 blur-3xl -z-10"
+                            className="absolute inset-0 bg-gradient-to-r from-sky-500/10 via-cyan-400/15 to-blue-500/10 blur-3xl -z-10"
                             animate={{ opacity: [0.5, 0.8, 0.5] }}
-                            transition={{ duration: 4, repeat: Infinity }}
+                            transition={{ duration: 5, repeat: Infinity }}
                         />
-                        <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-8 leading-tight">
-                            Package Your Photos <br />
-                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-200 via-cyan-400 to-blue-600">
-                                Instantly
+                        <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight">
+                            Make Photoshoots <br />
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-200 via-cyan-400 to-blue-500">
+                                Client Accessible
                             </span>
                         </h1>
                     </div>
 
-                    <div className="flex flex-col items-center gap-4 mb-16 md:mb-20">
-                        <span className="text-sm uppercase tracking-[0.2em] text-white/30">
-                            Steven Seagondollar | DropShock Digital
-                        </span>
+                    <p className="text-lg md:text-2xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
+                        PhotoPackager turns a finished shoot into organized delivery folders with originals, optimized JPEG/WebP files, compressed previews, and a client README.txt.
+                    </p>
+
+                    <p className="mt-6 text-sm md:text-base text-neutral-500 max-w-3xl mx-auto leading-relaxed">
+                        Built for photographers and studios that want a repeatable handoff without hand-sorting every file.
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+                        <button
+                            onClick={onStart}
+                            className="group inline-flex items-center gap-3 px-8 py-5 bg-white text-black rounded-full font-bold text-lg hover:bg-neutral-200 transition-all shadow-[0_0_50px_rgba(255,255,255,0.18)] hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                            <img src="/PhotoPackager_Icon.png" alt="" aria-hidden="true" className="w-8 h-8 object-contain" />
+                            <span>Build a Client Delivery</span>
+                        </button>
+                        <button
+                            onClick={() => setLogicOpen(true)}
+                            className="inline-flex items-center gap-3 px-7 py-5 rounded-full border border-white/10 bg-white/5 text-white font-semibold hover:bg-white/10 transition-colors"
+                        >
+                            See the workflow <ArrowRight className="w-4 h-4" />
+                        </button>
                     </div>
 
-                    <button
-                        onClick={onStart}
-                        className="group relative inline-flex items-center gap-3 px-8 py-5 bg-white text-black rounded-full font-bold text-xl hover:bg-neutral-200 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] hover:scale-[1.02] active:scale-[0.98] mb-16"
-                    >
-                        <img src="/PhotoPackager_Icon.png" alt="PhotoPackager" className="w-8 h-8 object-contain" />
-                        <span>Start Packaging Now</span>
-                    </button>
-
+                    <div className="flex flex-wrap items-center justify-center gap-6 mt-10 text-xs uppercase tracking-[0.2em] text-white/35">
+                        <span className="flex items-center gap-2">
+                            <Shield className="w-3.5 h-3.5 text-sky-400" />
+                            Keep originals by default
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+                            Optimized and compressed outputs
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <BookOpen className="w-3.5 h-3.5 text-blue-400" />
+                            Branded README.txt included
+                        </span>
+                    </div>
                 </motion.div>
 
-                {/* Scroll Indicator */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, y: [0, 10, 0] }}
-                    transition={{ delay: 1, duration: 2, repeat: Infinity, times: [0, 0.5, 1], ease: "easeInOut" }}
+                    transition={{ delay: 1, duration: 2, repeat: Infinity, times: [0, 0.5, 1], ease: 'easeInOut' }}
                     className="absolute bottom-6 flex flex-col items-center gap-2 cursor-pointer text-white/20 hover:text-white transition-colors"
                 >
-                    <span className="text-[10px] uppercase tracking-[0.2em]">Scroll to Learn More</span>
+                    <span className="text-[10px] uppercase tracking-[0.2em]">Scroll to learn more</span>
                     <ArrowDown className="w-5 h-5" />
                 </motion.div>
             </header>
 
-
-
-            {/* Showcase Animation with Hook */}
             <section className="py-24 bg-black relative z-10">
-                <div className="max-w-7xl mx-auto px-6 text-center">
-
-                    {/* The Hook (Moved Here) */}
-                    <div className="mb-20">
-                        <h2 className="text-2xl md:text-5xl font-bold text-white max-w-5xl mx-auto leading-tight mb-8">
-                            Zero Compression Loss. Maximum Efficiency. <br className="hidden md:block" />
-                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-200 via-cyan-400 to-blue-600">
-                                Automated Photography Workflows.
-                            </span>
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="mb-16 text-center max-w-4xl mx-auto">
+                        <span className="text-xs font-bold text-sky-400 tracking-[0.2em] uppercase block mb-3">What the app does</span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
+                            Repeatable delivery without the repetitive work.
                         </h2>
-                        <p className="text-lg md:text-xl text-neutral-400 max-w-4xl mx-auto leading-relaxed">
-                            Stop manually organizing, resizing, and stripping EXIF data from hundreds of photos. <br className="hidden md:block" />We package everything automatically, ready for client delivery.
+                        <p className="text-lg text-neutral-400 leading-relaxed">
+                            The README describes a simple pattern: organize the shoot, generate the right file types, handle metadata intentionally, and package the result in a way the client can actually use.
                         </p>
                     </div>
 
-                    <div className="mb-10">
-                        <span className="text-xs font-bold text-neutral-500 tracking-[0.2em] uppercase block mb-2">DropShock Digital Presents</span>
-                        <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">PhotoPackager</h2>
-                    </div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="relative rounded-xl overflow-hidden shadow-[0_0_100px_rgba(56,189,248,0.15)] border border-white/10 max-w-4xl mx-auto"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 pointer-events-none" />
-
-                        {/* App Screenshot */}
-                        <button
-                            onClick={onStart}
-                            className="relative group text-center block w-full cursor-pointer overflow-hidden rounded-xl"
-                        >
-                            <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors z-20" />
-                            <img
-                                src="/app_hero_screenshot.png"
-                                alt="PhotoPackager Interface"
-                                className="w-full h-auto object-cover mx-auto opacity-90 group-hover:opacity-100 transition-all duration-500 group-hover:scale-[1.01]"
-                                onError={(e) => {
-                                    // Fallback if screenshot missing (auto-recovery to abstract)
-                                    (e.target as HTMLImageElement).style.display = 'none';
-                                    (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                                }}
-                            />
-                            {/* Fallback Abstract (Hidden by default unless error) */}
-                            <div className="hidden absolute inset-0 bg-neutral-900 flex items-center justify-center h-96">
-                                <div className="absolute inset-x-0 top-0 h-1 bg-blue-500 shadow-[0_0_20px_rgba(56,189,248,0.8)] z-20 animate-[scan_3s_ease-in-out_infinite]" />
-                                <span className="text-blue-500 font-mono">Loading Interface...</span>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/5 relative group hover:border-sky-500/20 transition-all">
+                            <div className="absolute top-6 right-6 text-7xl font-bold text-white/5 select-none">1</div>
+                            <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center mb-6 text-sky-400">
+                                <Camera className="w-6 h-6" />
                             </div>
-                        </button>
-                    </motion.div>
+                            <h3 className="text-xl font-bold mb-3">Keep the shoot organized</h3>
+                            <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+                                Start from the original photos, choose a shoot base name, and let PhotoPackager handle the folder structure instead of creating it by hand.
+                            </p>
+                            <ul className="text-xs text-neutral-500 space-y-2">
+                                <li className="flex items-center gap-2"><div className="w-1 h-1 bg-sky-500 rounded-full" /> Copy or move originals with care</li>
+                                <li className="flex items-center gap-2"><div className="w-1 h-1 bg-sky-500 rounded-full" /> Predictable output folders</li>
+                            </ul>
+                        </div>
+
+                        <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/5 relative group hover:border-cyan-500/20 transition-all">
+                            <div className="absolute top-6 right-6 text-7xl font-bold text-white/5 select-none">2</div>
+                            <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-6 text-cyan-400">
+                                <FileImage className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3">Create the right formats</h3>
+                            <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+                                Generate optimized JPG or WebP deliverables, or compressed versions when you need smaller files for galleries, previews, or quick sharing.
+                            </p>
+                            <ul className="text-xs text-neutral-500 space-y-2">
+                                <li className="flex items-center gap-2"><div className="w-1 h-1 bg-cyan-500 rounded-full" /> Quality settings stay configurable</li>
+                                <li className="flex items-center gap-2"><div className="w-1 h-1 bg-cyan-500 rounded-full" /> EXIF handling stays intentional</li>
+                            </ul>
+                        </div>
+
+                        <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/5 relative group hover:border-blue-500/20 transition-all">
+                            <div className="absolute top-6 right-6 text-7xl font-bold text-white/5 select-none">3</div>
+                            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-6 text-blue-400">
+                                <Package className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3">Deliver a client-ready package</h3>
+                            <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+                                Bundle the output into a polished handoff with ZIP archives and a README.txt that carries your studio details and support contact.
+                            </p>
+                            <ul className="text-xs text-neutral-500 space-y-2">
+                                <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full" /> Branding included in the package</li>
+                                <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full" /> Easy for clients to navigate</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            {/* 3-Box Educational Flow (Removed from here) */}
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-sky-500/15 to-transparent" />
 
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-blue-500/10 to-transparent" />
-
-            {/* 3 Steps */}
             <section className="py-24 px-6 max-w-7xl mx-auto relative z-10">
-                <h2 className="text-3xl font-bold text-center mb-16">The PhotoPackager Workflow</h2>
                 <div className="grid md:grid-cols-3 gap-8">
-                    {/* Step 1 */}
-                    <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/5 relative group hover:border-blue-500/20 transition-all">
-                        <div className="absolute top-6 right-6 text-7xl font-bold text-white/5 select-none">1</div>
-                        <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-6 text-blue-400">
-                            <Database className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-3">Upload & Secure</h3>
-                        <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-                            Upload your full-resolution client shoots. We strip metadata to protect privacy and secure the highest quality raw assets on our backend API.
-                        </p>
-                        <ul className="text-xs text-neutral-500 space-y-2">
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full" /> EXIF Data Stripping</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-blue-500 rounded-full" /> Secure File Handling</li>
-                        </ul>
-                    </div>
-
-                    {/* Step 2 */}
-                    <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/5 relative group hover:border-cyan-500/20 transition-all">
-                        <div className="absolute top-6 right-6 text-7xl font-bold text-white/5 select-none">2</div>
-                        <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-6 text-cyan-400">
-                            <Zap className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-3">Optimize & Resize</h3>
-                        <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-                            Our asynchronous Celery workers automatically generate perfect web-ready, high-res, and thumbnail versions of every image with cutting-edge Pillow compression.
-                        </p>
-                        <ul className="text-xs text-neutral-500 space-y-2">
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-cyan-500 rounded-full" /> Background Processing</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-cyan-500 rounded-full" /> ZERO Quality Degradation</li>
-                        </ul>
-                    </div>
-
-                    {/* Step 3 */}
-                    <div className="p-8 rounded-3xl bg-neutral-900/40 border border-white/5 relative group hover:border-indigo-500/20 transition-all">
-                        <div className="absolute top-6 right-6 text-7xl font-bold text-white/5 select-none">3</div>
-                        <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center mb-6 text-indigo-400">
-                            <FileCode className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-3">Package & Deliver</h3>
-                        <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-                            All your photos are packaged neatly into single ZIP deliverables sorted by optimized size. Ready to be sent to clients instantly.
-                        </p>
-                        <ul className="text-xs text-neutral-500 space-y-2">
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-indigo-500 rounded-full" /> 1-Click ZIP Archives</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-indigo-500 rounded-full" /> Streamlined Delivery</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-blue-500/10 to-transparent" />
-
-            {/* NEW 3-COLUMN GRID SECTION (Replacing Payoff, Logic, Founder) */}
-            <section className="py-32 px-6 relative z-10 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-
-                    {/* 1. The Payoff */}
                     <div className="group relative rounded-3xl bg-neutral-900/30 border border-white/5 overflow-hidden flex flex-col hover:bg-neutral-900/50 transition-colors">
-                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-sky-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                         <div className="p-8 flex flex-col h-full items-center text-center z-10">
-                            <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 ring-1 ring-blue-500/20 group-hover:ring-blue-500/40 transition-all">
-                                <Zap className="w-8 h-8 text-blue-500" />
+                            <div className="w-16 h-16 rounded-2xl bg-sky-500/10 flex items-center justify-center mb-6 ring-1 ring-sky-500/20 group-hover:ring-sky-500/40 transition-all">
+                                <Shield className="w-8 h-8 text-sky-400" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">The Payoff</h3>
-                            <p className="text-xs font-bold text-blue-500 uppercase tracking-widest mb-6">Massive Time Savings</p>
+                            <h3 className="text-2xl font-bold text-white mb-2">Keep Originals</h3>
+                            <p className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-6">Copy by default</p>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                                Why spend hours resizing photos manually? Drop them in, get them out. Professional deliverables in seconds.
+                                Protect the source shoot by copying files into the package unless you explicitly choose a more aggressive workflow.
                             </p>
                             <div className="mt-auto">
                                 <button
                                     onClick={() => setPayoffOpen(true)}
-                                    className="inline-flex items-center gap-2 text-sm font-bold text-white border-b border-blue-500/50 pb-0.5 hover:text-blue-500 hover:border-blue-500 transition-all"
+                                    className="inline-flex items-center gap-2 text-sm font-bold text-white border-b border-sky-500/50 pb-0.5 hover:text-sky-400 hover:border-sky-400 transition-all"
                                 >
-                                    View Benefits <ArrowRight className="w-4 h-4" />
+                                    Learn the workflow <ArrowRight className="w-4 h-4" />
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    {/* 2. The Logic (Existing Focus) */}
                     <div className="group relative rounded-3xl bg-neutral-900/30 border border-white/5 overflow-hidden flex flex-col hover:bg-neutral-900/50 transition-colors">
                         <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                         <div className="p-8 flex flex-col h-full items-center text-center z-10">
                             <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 ring-1 ring-cyan-500/20 group-hover:ring-cyan-500/40 transition-all">
-                                <BookOpen className="w-8 h-8 text-cyan-500" />
+                                <Zap className="w-8 h-8 text-cyan-400" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">The Logic</h3>
-                            <p className="text-xs font-bold text-cyan-500 uppercase tracking-widest mb-6">Why It Matters</p>
+                            <h3 className="text-2xl font-bold text-white mb-2">Multiple Formats</h3>
+                            <p className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-6">JPEG and WebP</p>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                                Every client wants high-res for print and web-res for social. Providing both immediately elevates your brand's professionalism.
+                                Generate optimized and compressed versions from the same job, so every delivery can match the use case instead of forcing one size for everything.
                             </p>
                             <div className="mt-auto">
                                 <button
                                     onClick={() => setLogicOpen(true)}
-                                    className="inline-flex items-center gap-2 text-sm font-bold text-white border-b border-cyan-500/50 pb-0.5 hover:text-cyan-500 hover:border-cyan-500 transition-all"
+                                    className="inline-flex items-center gap-2 text-sm font-bold text-white border-b border-cyan-500/50 pb-0.5 hover:text-cyan-400 hover:border-cyan-400 transition-all"
                                 >
-                                    Deep Dive / Mechanics <ArrowRight className="w-4 h-4" />
+                                    See why it matters <ArrowRight className="w-4 h-4" />
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    {/* 3. The Founder */}
                     <div className="group relative rounded-3xl bg-neutral-900/30 border border-white/5 overflow-hidden flex flex-col hover:bg-neutral-900/50 transition-colors">
-                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                         <div className="p-8 flex flex-col h-full items-center text-center z-10">
                             <div className="w-16 h-16 rounded-full bg-neutral-800 border-2 border-white/10 overflow-hidden mb-6 shadow-xl group-hover:scale-105 transition-transform">
                                 <img src="/SS_Suit_Backdrop.jpg" alt="Steven Seagondollar" className="w-full h-full object-cover" />
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-2">The Founder</h3>
-                            <p className="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-6">Create with Purpose</p>
+                            <p className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-6">Built from real post-shoot work</p>
                             <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                                "This tool began as a necessity... I needed an automated pipeline to handle post-shoot organization without losing quality."
+                                PhotoPackager came from the desire to turn a finished shoot into a clean delivery without doing the same folder work twice.
                             </p>
                             <div className="mt-auto">
                                 <button
                                     onClick={() => setFounderOpen(true)}
-                                    className="inline-flex items-center gap-2 text-sm font-bold text-white border-b border-indigo-500/50 pb-0.5 hover:text-indigo-500 hover:border-indigo-500 transition-all"
+                                    className="inline-flex items-center gap-2 text-sm font-bold text-white border-b border-blue-500/50 pb-0.5 hover:text-blue-400 hover:border-blue-400 transition-all"
                                 >
-                                    Read Message <ArrowRight className="w-4 h-4" />
+                                    Read the note <ArrowRight className="w-4 h-4" />
                                 </button>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="border-t border-blue-500/10 py-12 bg-neutral-950 relative z-10">
+            <footer className="border-t border-sky-500/10 py-12 bg-neutral-950 relative z-10">
                 <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-neutral-500">
                     <div className="flex flex-col text-center md:text-left gap-1">
-                        <span className="flex items-center justify-center md:justify-start gap-2 font-bold text-emerald-400">
-                            <Shield className="w-4 h-4" />
-                            100% Secure Backend API
+                        <span className="flex items-center justify-center md:justify-start gap-2 font-bold text-sky-400">
+                            <Package className="w-4 h-4" />
+                            Built for repeatable client delivery
                         </span>
                         <p className="text-[10px] text-neutral-600 max-w-md mt-2">
-                            PhotoPackager securely manages photos. We preserve original quality completely. DropShock Digital ensures enterprise-grade security on photography resources.
+                            PhotoPackager keeps the workflow explicit: organize the shoot, choose the outputs, and package the handoff with your own branding.
                         </p>
                     </div>
                     <p className="text-center md:text-left">© 2026 DropShock Digital. Created by Steven Seagondollar.</p>
@@ -306,32 +260,24 @@ export function LandingPage({ onStart }: LandingPageProps) {
                             <button onClick={() => setLegalOpen('terms')} className="hover:text-white transition-colors">Terms of Use</button>
                             <a href="mailto:support@dropshockdigital.com" className="hover:text-white transition-colors">Support</a>
                         </div>
-                        <div className="hidden md:block w-px h-4 bg-white/10"></div>
+                        <div className="hidden md:block w-px h-4 bg-white/10" />
                         <div className="flex gap-6">
-                            <a href="https://github.com/DropShock-Digital" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-                                <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Request Feature
+                            <a href="https://github.com/DropShock-Digital/PhotoPackager" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-sky-400 transition-colors">
+                                <Github className="w-3.5 h-3.5" />
+                                PhotoPackager on GitHub
                             </a>
                             <a href="mailto:support@dropshockdigital.com" className="flex items-center gap-2 hover:text-red-400 transition-colors">
-                                <AlertTriangle className="w-3 h-3" /> Report Bug
+                                <Shield className="w-3.5 h-3.5" />
+                                Contact support
                             </a>
                         </div>
                     </div>
                 </div>
             </footer>
 
-            {/* Legal Modals */}
-            <LogicModal
-                isOpen={logicOpen}
-                onClose={() => setLogicOpen(false)}
-            />
-            <PayoffModal
-                isOpen={payoffOpen}
-                onClose={() => setPayoffOpen(false)}
-            />
-            <FounderModal
-                isOpen={founderOpen}
-                onClose={() => setFounderOpen(false)}
-            />
+            <LogicModal isOpen={logicOpen} onClose={() => setLogicOpen(false)} />
+            <PayoffModal isOpen={payoffOpen} onClose={() => setPayoffOpen(false)} />
+            <FounderModal isOpen={founderOpen} onClose={() => setFounderOpen(false)} />
 
             <LegalModal
                 isOpen={legalOpen === 'terms'}
@@ -343,30 +289,30 @@ export function LandingPage({ onStart }: LandingPageProps) {
 
                         <section>
                             <h3 className="text-white font-bold mb-2">1. Acceptance of Terms</h3>
-                            <p>By accessing or using PhotoPackager ("The Software"), you agree to be bound by these Terms. The Software is owned and operated by <strong>DropShock Digital</strong> and <strong>Steven Seagondollar</strong>, operating out of Hesperia, California.</p>
+                            <p>By accessing or using PhotoPackager, you agree to these Terms. The software is owned and operated by DropShock Digital LLC and Steven Seagondollar.</p>
                         </section>
 
                         <section>
                             <h3 className="text-white font-bold mb-2">2. Limitation of Liability</h3>
-                            <div className="p-4 bg-red-900/10 border border-red-500/20 rounded-lg text-red-200">
+                            <div className="p-4 bg-sky-900/10 border border-sky-500/20 rounded-lg text-sky-100">
                                 <p className="uppercase font-bold text-xs mb-2">Important</p>
-                                <p>To the maximum extent permitted by law, DropShock Digital and Steven Seagondollar shall NOT be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use this software, including but not limited to data loss, leakage of sensitive information to third-party AI providers, or corruption of local files.</p>
+                                <p>To the maximum extent permitted by law, DropShock Digital LLC and Steven Seagondollar are not liable for damages resulting from use of the software, including data loss or corruption of local files.</p>
                             </div>
                         </section>
 
                         <section>
                             <h3 className="text-white font-bold mb-2">3. User Responsibility</h3>
-                            <p>You acknowledge that you are solely responsible for the content you process. You agree not to use this tool to process illegal content or violate the Terms of Service of any third-party AI provider (e.g., OpenAI, Anthropic, Google).</p>
+                            <p>You are responsible for the content you process and for choosing settings appropriate to your workflow.</p>
                         </section>
 
                         <section>
-                            <h3 className="text-white font-bold mb-2">4. Accessibility (ADA Compliance)</h3>
-                            <p>We are committed to making our software accessible to all users, including those with disabilities. We strive to adhere to WCAG 2.1 Level AA standards. If you encounter accessibility barriers, please contact support@dropshockdigital.com.</p>
+                            <h3 className="text-white font-bold mb-2">4. Accessibility</h3>
+                            <p>If you encounter accessibility barriers, please contact support@dropshockdigital.com.</p>
                         </section>
 
                         <section>
                             <h3 className="text-white font-bold mb-2">5. Governing Law</h3>
-                            <p>These terms are governed by the laws of the State of California. Any disputes arising from these terms shall be subject to the exclusive jurisdiction of the state and federal courts located in <strong>San Bernardino County, California</strong>.</p>
+                            <p>These terms are governed by the laws of the State of California, with disputes subject to the courts located in San Bernardino County, California.</p>
                         </section>
                     </div>
                 }
@@ -378,20 +324,20 @@ export function LandingPage({ onStart }: LandingPageProps) {
                 title="Privacy Policy"
                 content={
                     <div className="space-y-6">
-                        <p className="text-xs text-neutral-500 uppercase tracking-widest font-bold">Effect Date: December 1, 2025</p>
+                        <p className="text-xs text-neutral-500 uppercase tracking-widest font-bold">Effective Date: December 1, 2025</p>
 
                         <section>
-                            <h3 className="text-white font-bold mb-2">1. The "No-Data" Philosophy</h3>
-                            <p>PhotoPackager operates on a simple principle: <strong>We do not want your data.</strong> The software packages photos locally, ensuring client privacy.</p>
+                            <h3 className="text-white font-bold mb-2">1. The No-Data Philosophy</h3>
+                            <p>PhotoPackager is designed to package photos, not to turn your workflow into a data product. The goal is to keep the delivery process focused on your files and your settings.</p>
                         </section>
 
                         <section>
                             <h2 className="text-white font-bold mb-4">2. No Third-Party Tracking</h2>
-                            <p>We do not use Google Analytics, Facebook Pixels, or third-party cookies. Your usage remains a private interaction between you and your computer.</p>
+                            <p>We do not use analytics cookies or hidden tracking scripts in the site copy here. Your usage should feel like a straightforward product interaction, not a marketing funnel.</p>
                         </section>
                     </div>
                 }
             />
         </div>
-    )
+    );
 }
