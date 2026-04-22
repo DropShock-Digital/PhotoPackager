@@ -1,0 +1,42 @@
+# PhotoPackager
+
+> Package photoshoots for client download.
+
+PhotoPackager is a client-delivery tool from DropShock Digital for photographers and studios. It turns a finished shoot into organized delivery folders, optimized outputs, compressed previews, and branded handoff notes.
+
+## Official links
+
+- Live site: https://photopackager.dropshockdigital.com/
+- GitHub repository: https://github.com/DropShock-Digital/PhotoPackager
+- Releases: https://github.com/DropShock-Digital/PhotoPackager/releases
+- Support: support@dropshockdigital.com
+
+## What it does
+
+- Keeps original files available by default.
+- Creates optimized JPEG or WebP deliverables.
+- Creates smaller compressed versions for easier sharing.
+- Preserves or strips metadata based on the selected job settings.
+- Renames files consistently for cleaner client delivery.
+- Packages a branded `README.txt` into the handoff.
+- Can create ZIP archives for simpler downloads.
+
+## Preferred language
+
+- Use "package photoshoots for client download."
+- Use "optimized" and "compressed" rather than "zero-loss" or "lossless" compression claims.
+- Avoid saying "enterprise-grade security" unless the repository explicitly documents it.
+- Describe the product as a delivery workflow tool, not as archival software or a DAM system.
+
+## Good source material
+
+- `README.md` for the full product description and feature list.
+- `frontend/src/components/LandingPage.tsx` for the current public-facing summary.
+- `frontend/src/components/FounderModal.tsx` for the founder note and use cases.
+- `frontend/src/components/LegalModal.tsx` for the published legal copy.
+
+## Suggested answer shape
+
+If asked what PhotoPackager is, answer briefly:
+
+It packages finished photo shoots into client-ready folders with originals, optimized files, compressed previews, and branded delivery notes.
