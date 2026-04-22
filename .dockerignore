@@ -1,17 +1,43 @@
-node_modules
-.venv
-.venv*
-venv*
-__pycache__
-*.pyc
-.pytest_cache
 .git
-frontend/node_modules
-outputs
-temp_uploads
+.gitignore
+
+# Node and Python dependencies
+node_modules/
+frontend/node_modules/
+.venv/
+.venv*
+venv/
+venv_mac/
+venv_windows/
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Large local artifacts and generated files
+outputs/
+temp_uploads/
+dist/
+build/
+*.dmg
+*.zip
+*.log
 test_output.txt
-.github
-docs
-gui
-cli
-assets
+
+# Source trees that are not needed for the container image
+.github/
+docs/
+gui/
+cli/
+assets/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -99,7 +99,7 @@ async def create_packaging_job(
 
     # Launch background task with Celery
     celery_app.send_task(
-        "photopackager.web_app.worker.run_packaging_job",
+        "worker.run_packaging_job",
         args=[job_id, str(job_dir), _dump_job_settings(job_settings)],
         task_id=job_id
     )
