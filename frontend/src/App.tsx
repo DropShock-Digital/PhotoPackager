@@ -183,7 +183,7 @@ function App() {
       <nav className={clsx("fixed top-0 w-full z-50 border-b transition-all duration-300", scrolled ? "bg-black/80 backdrop-blur-md border-white/5" : "bg-transparent border-transparent")}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Package className="w-8 h-8 text-sky-400" />
+            <img src="/PhotoPackager_Patch.png" alt="" aria-hidden="true" className="w-8 h-8 object-contain drop-shadow-[0_0_14px_rgba(14,165,233,0.25)]" />
             <span className="font-bold tracking-tight text-white hidden sm:block">PhotoPackager</span>
           </div>
 

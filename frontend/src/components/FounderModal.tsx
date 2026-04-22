@@ -77,7 +77,10 @@ export function FounderModal({ isOpen, onClose }: FounderModalProps) {
                                             PhotoPackager grew out of a very practical need: after a shoot, I wanted a cleaner way to hand off files without spending the evening resizing, renaming, and sorting the same folders by hand.
                                         </p>
                                         <p>
-                                            The goal here is straightforward: keep the process dependable, keep the output organized, and make the delivery feel professional for the client without pretending the app does more than it actually does.
+                                            A lot of clients do not want one giant folder. They want a print-ready set, high-quality digitals, and social media-sized files they can actually share.
+                                        </p>
+                                        <p>
+                                            And sometimes the bigger issue is simple storage: phones run out of space fast, so the compressed versions matter because they help everyone get the photos without fighting download limits or Google Drive friction. Pre-zipping the delivery keeps it easier to move, easier to open, and easier to live with.
                                         </p>
                                     </div>
                                 </div>
