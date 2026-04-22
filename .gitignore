@@ -5,6 +5,20 @@ build/
 venv/
 .venv/
 
+# Test and runtime scratch space
+.pytest_cache/
+.pytest-tmp/
+.codex-test-tmp/
+__pycache__/
+*.pyc
+*.log
+error.txt
+temp_test_error.txt
+test_output.txt
+photopackager_crash.log
+outputs/*
+temp_uploads/*
+
 # Environment / Secrets
 .env
 .env.*

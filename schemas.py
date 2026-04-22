@@ -1,34 +1,28 @@
 from pydantic import BaseModel, Field
+from typing import Optional
 
 
 class JobSettings(BaseModel):
     """Pydantic model for the settings of a packaging job."""
-    shoot_name: str = Field(..., description="The name of the photo shoot or project.")
-    base_name: str = Field(..., description="The base name for renaming files.")
+    process_original_files: bool = True
+    process_raw_files: bool = False
+    generate_optimized_jpg: bool = True
+    generate_compressed_jpg: bool = True
+    generate_optimized_webp: bool = False
+    generate_compressed_webp: bool = False
+    quality_presets: str = "high"
+    exif_option: str = "keep"
+    create_zip_archives: bool = True
+    create_zip_packages: bool = True
+    max_workers: int = 10
+    company_name: str = ""
+    website_url: str = ""
+    support_email: str = ""
+    shoot_base_name: Optional[str] = ""
 
-    # Image Processing Options
+    # Internal mappings
     quality_optimized: int = Field(95, ge=1, le=100)
     quality_compressed: int = Field(80, ge=1, le=100)
-    generate_optimized_jpg: bool = True
-    generate_optimized_webp: bool = True
-    generate_compressed_jpg: bool = True
-    generate_compressed_webp: bool = True
-
-    # EXIF/Metadata Options
-    exif_option: str = "keep"  # 'keep', 'strip_all', 'date', 'camera', 'both'
-
-    # File Handling Options
-    include_raw_files: bool = False
-    rename_files: bool = True
-
-    # Packaging Options
-    create_zip_packages: bool = True
-    zip_compression_level: int = Field(6, ge=0, le=9)
-
-    # Branding/Delivery Options
-    delivery_company_name: str = ""
-    delivery_website: str = ""
-    delivery_support_email: str = ""
 
 
 class JobResponse(BaseModel):

@@ -1,9 +1,9 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "web_app/Dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "cd web_app && uvicorn main:app --host 0.0.0.0 --port $PORT"
+startCommand = "sh -c 'trap \"kill 0\" TERM INT; celery -A worker.celery_app worker --loglevel=${CELERY_LOGLEVEL:-info} & exec uvicorn main:app --host 0.0.0.0 --port ${PORT:-5601}'"
 healthcheckPath = "/"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10

@@ -1,38 +1,47 @@
 import uuid
 import shutil
-import json
 from pathlib import Path
 from typing import List
 
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Depends
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 # Import shared components
-from .worker import celery_app
-from .photopackager_core.config import OUTPUTS_DIR, TEMP_UPLOADS_DIR
-from .schemas import JobSettings, JobResponse
+from worker import celery_app
+from config import OUTPUTS_DIR, TEMP_UPLOADS_DIR
+from schemas import JobSettings, JobResponse
 
 # Import MCP Server components
 from fastmcp import FastMCP
-from .mcp_tools import get_tools
+from mcp_tools import get_tools
 
 app = FastAPI()
 
-# --- Static Files ---
-# Mount static files FIRST to ensure they handle the root path.
-STATIC_DIR = Path(__file__).parent / "static"
-app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
+STATIC_DIR = Path(__file__).parent / "frontend" / "dist"
 
-# Mount the MCP server as a sub-application
 mcp_server = FastMCP(tools=get_tools())
-app.mount("/mcp", mcp_server)
 
 # Ensure base directories exist
 TEMP_UPLOADS_DIR.mkdir(exist_ok=True)
 OUTPUTS_DIR.mkdir(exist_ok=True)
 
 # --- Helper Functions ---
+
+def _parse_job_settings(settings: str) -> JobSettings:
+    """Parse job settings JSON across both Pydantic v1 and v2."""
+    parser = getattr(JobSettings, "model_validate_json", None)
+    if parser is not None:
+        return parser(settings)
+    return JobSettings.parse_raw(settings)
+
+
+def _dump_job_settings(job_settings: JobSettings) -> dict:
+    """Serialize settings for Celery across both Pydantic v1 and v2."""
+    dumper = getattr(job_settings, "model_dump", None)
+    if dumper is not None:
+        return dumper()
+    return job_settings.dict()
 
 def get_job_status(job_id: str):
     """Helper to get the status of a Celery task."""
@@ -68,7 +77,7 @@ async def create_packaging_job(
 ):
     """Accepts photo uploads and job settings to start a packaging job."""
     try:
-        job_settings = JobSettings.parse_raw(settings)
+        job_settings = _parse_job_settings(settings)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Invalid settings format: {e}")
 
@@ -78,14 +87,20 @@ async def create_packaging_job(
 
     # Save uploaded files
     for file in files:
-        file_path = job_dir / file.filename
+        if not file.filename:
+            continue
+        # Strict sanitization: remove path components, get purely the filename.
+        clean_filename = Path(file.filename).name
+        if not clean_filename or clean_filename == '.' or clean_filename == '..':
+            continue
+        file_path = job_dir / clean_filename
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
     # Launch background task with Celery
     celery_app.send_task(
-        "photopackager.web_app.worker.run_packaging_job",
-        args=[job_id, str(job_dir), job_settings.dict()],
+        "worker.run_packaging_job",
+        args=[job_id, str(job_dir), _dump_job_settings(job_settings)],
         task_id=job_id
     )
 
@@ -105,13 +120,31 @@ async def get_job_status_api(job_id: str):
 @app.get("/api/jobs/{job_id}/download/{zip_filename}")
 async def download_zip_package(job_id: str, zip_filename: str):
     """Allows downloading of a packaged ZIP file."""
-    # Basic security check
-    if ".." in zip_filename or zip_filename.startswith("/"):
-        raise HTTPException(status_code=400, detail="Invalid filename.")
+    # Strict validation of job_id structure (UUID format)
+    try:
+        import uuid
+        val = uuid.UUID(job_id, version=4)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid job identifier formatting.")
 
-    file_path = OUTPUTS_DIR / job_id / zip_filename
+    # Strict zip_filename sanitization
+    clean_filename = Path(zip_filename).name
+    if not clean_filename or not clean_filename.endswith('.zip') or clean_filename in ('.', '..'):
+        raise HTTPException(status_code=400, detail="Invalid filename format or extension.")
+
+    file_path = OUTPUTS_DIR / job_id / clean_filename
 
     if not file_path.is_file():
         raise HTTPException(status_code=404, detail="File not found.")
 
     return FileResponse(file_path, media_type='application/zip', filename=zip_filename)
+
+
+def _mount_runtime_apps() -> None:
+    """Mount runtime sub-apps after API routes so they do not shadow /api."""
+    app.mount("/mcp", mcp_server)
+    if STATIC_DIR.is_dir():
+        app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="frontend")
+
+
+_mount_runtime_apps()

@@ -1,3 +1,6 @@
+# Compatibility Dockerfile for Railway service configurations that still point at web_app/Dockerfile.
+# Keep this in sync with the repo-root Dockerfile until the Railway service is repointed.
+
 # Stage 1: Build the React frontend
 FROM node:22 AS frontend-builder
 WORKDIR /app/frontend

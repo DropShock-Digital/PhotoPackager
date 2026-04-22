@@ -1,21 +1,40 @@
+import os
 from pathlib import Path
+
 from celery import Celery
 
-# Local imports from the core logic
-from .photopackager_core.job import PhotoPackagerJob
-from .photopackager_core.models import PhotoPackagerSettings, QualitySettings
-from .schemas import JobSettings
-from .photopackager_core.config import OUTPUTS_DIR
+# Local imports from the core logic (root level)
+from config import OUTPUTS_DIR
+from job import PhotoPackagerJob, PhotoPackagerSettings
+from schemas import JobSettings
 
-# Configure Celery
+
+def _broker_url() -> str:
+    return (
+        os.getenv("CELERY_BROKER_URL")
+        or os.getenv("REDIS_URL")
+        or "memory://"
+    )
+
+
+def _result_backend_url() -> str:
+    return (
+        os.getenv("CELERY_RESULT_BACKEND")
+        or os.getenv("REDIS_URL")
+        or "cache+memory://"
+    )
+
+
 celery_app = Celery(
-    'tasks',
-    broker='redis://localhost:6379/0',
-    backend='redis://localhost:6379/0'
+    "tasks",
+    broker=_broker_url(),
+    backend=_result_backend_url(),
 )
+celery_app.conf.task_track_started = True
+celery_app.conf.broker_connection_retry_on_startup = True
 
 
-@celery_app.task(name="photopackager.web_app.worker.run_packaging_job")
+@celery_app.task(name="worker.run_packaging_job")
 def run_packaging_job(job_id: str, source_dir: str, settings_dict: dict):
     """
     Celery task to run a photo packaging job in the background.
@@ -29,40 +48,42 @@ def run_packaging_job(job_id: str, source_dir: str, settings_dict: dict):
         A dictionary summary of the completed job.
     """
     try:
-        # 1. Prepare paths
-        source_path = Path(source_dir)
+        source_path = Path(source_dir).resolve()
         output_path = OUTPUTS_DIR / job_id
         output_path.mkdir(parents=True, exist_ok=True)
 
-        # 2. Map API settings to core logic settings
         api_settings = JobSettings(**settings_dict)
-        quality_settings = []
-        if api_settings.generate_optimized_jpg:
-            quality_settings.append(QualitySettings(directory_name='optimized_jpg', file_format='jpg', quality_level=api_settings.quality_optimized))
-        if api_settings.generate_optimized_webp:
-            quality_settings.append(QualitySettings(directory_name='optimized_webp', file_format='webp', quality_level=api_settings.quality_optimized))
-        if api_settings.generate_compressed_jpg:
-            quality_settings.append(QualitySettings(directory_name='compressed_jpg', file_format='jpg', quality_level=api_settings.quality_compressed))
-        if api_settings.generate_compressed_webp:
-            quality_settings.append(QualitySettings(directory_name='compressed_webp', file_format='webp', quality_level=api_settings.quality_compressed))
-
-        settings = PhotoPackagerSettings(
-            quality_settings=quality_settings,
-            create_zip=api_settings.create_zip_packages
+        job_settings = PhotoPackagerSettings(
+            source_folder=str(source_path),
+            output_folder=str(output_path),
+            generate_jpg=True,
+            generate_webp=True,
+            generate_compressed_jpg=api_settings.generate_compressed_jpg,
+            generate_compressed_webp=api_settings.generate_compressed_webp,
+            create_zip=api_settings.create_zip_packages,
+            exif_policy=api_settings.exif_option if hasattr(api_settings, "exif_option") else "keep",
+            workers=api_settings.max_workers,
+            include_raw=api_settings.process_raw_files,
+            delivery_company_name=api_settings.company_name,
+            delivery_website=api_settings.website_url,
+            delivery_support_email=api_settings.support_email,
+            shoot_name=getattr(api_settings, "shoot_base_name", None) or job_id,
         )
 
-        # 3. Initialize and run the job
-        job = PhotoPackagerJob(
-            job_id=job_id,
-            settings=settings,
-            source_path=source_path,
-            output_path=output_path
-        )
-        summary = job.run()
+        job_instance = PhotoPackagerJob(settings=job_settings)
+        summary = job_instance.run()
 
-        # 4. Return the summary, converted to a dictionary for serialization
-        return summary.to_dict()
+        return {
+            "start_time": summary.start_time,
+            "end_time": summary.end_time,
+            "processed": summary.processed_files_count,
+            "generated": summary.generated_files_count,
+            "failed": summary.error_files_count,
+            "errors": [err for _, err in summary.error_details],
+        }
     except Exception as e:
-        # Log the exception and re-raise to mark the task as failed
-        print(f"Job {job_id} failed with error: {e}")
-        raise
+        import traceback
+
+        error_msg = f"Job {job_id} failed with error: {e}\\n{traceback.format_exc()}"
+        print(error_msg)
+        raise Exception(error_msg)

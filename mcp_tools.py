@@ -5,9 +5,17 @@ from typing import List
 from pydantic import BaseModel, Field
 
 # Import shared components
-from .schemas import JobSettings, JobResponse
-from .worker import celery_app
-from .photopackager_core.config import TEMP_UPLOADS_DIR
+from schemas import JobSettings, JobResponse
+from worker import celery_app
+from config import TEMP_UPLOADS_DIR
+
+
+def _dump_job_settings(job_settings: JobSettings) -> dict:
+    """Serialize settings for Celery across both Pydantic v1 and v2."""
+    dumper = getattr(job_settings, "model_dump", None)
+    if dumper is not None:
+        return dumper()
+    return job_settings.dict()
 
 
 class MCPPackagePhotosInput(BaseModel):
@@ -42,8 +50,8 @@ async def package_photos(input: MCPPackagePhotosInput) -> JobResponse:
 
     # 2. Launch background task with Celery
     celery_app.send_task(
-        "photopackager.web_app.worker.run_packaging_job",
-        args=[job_id, str(job_dir), input.settings.dict()],
+        "worker.run_packaging_job",
+        args=[job_id, str(job_dir), _dump_job_settings(input.settings)],
         task_id=job_id
     )
 

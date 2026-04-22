@@ -2,7 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import os
+from pathlib import Path
 from typing import Set
+
+OUTPUTS_DIR = Path("./outputs").resolve()
+TEMP_UPLOADS_DIR = Path("./temp_uploads").resolve()
 
 TOOL_DISPLAY_NAME: str = "PhotoPackager"
 
