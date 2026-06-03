@@ -60,11 +60,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     </div>
 
                     <p className="text-lg md:text-2xl text-neutral-300 max-w-4xl mx-auto leading-relaxed">
-                        Package a finished shoot into originals, optimized files, compressed previews, and a branded README.txt.
-                    </p>
-
-                    <p className="mt-6 text-sm md:text-base text-neutral-500 max-w-3xl mx-auto leading-relaxed">
-                        Built for clean handoffs, lighter downloads, and less folder work.
+                        Package shoots for delivery.
                     </p>
 
                     <div className="flex items-center justify-center mt-10">
@@ -104,12 +100,42 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     </motion.div>
             </header>
 
+            <section className="px-6 pb-8 relative z-10">
+                <div className="max-w-7xl mx-auto">
+                    <div className="mb-12 text-center max-w-3xl mx-auto">
+                        <span className="text-xs font-bold text-sky-400 tracking-[0.2em] uppercase block mb-3">App Preview</span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+                            The interface, framed cleanly.
+                        </h2>
+                    </div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.25 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative mx-auto max-w-6xl"
+                    >
+                        <div className="absolute inset-0 -z-10 rounded-[3rem] bg-sky-500/20 blur-[160px]" />
+                        <div className="absolute inset-x-10 top-10 h-40 -z-10 rounded-full bg-blue-500/10 blur-[90px]" />
+                        <div className="relative overflow-hidden rounded-[2rem] border border-sky-500/20 bg-neutral-950/90 p-3 md:p-4 shadow-[0_0_120px_rgba(14,165,233,0.16)]">
+                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-400/10 via-transparent to-blue-500/10" />
+                            <img
+                                src="/windows_app.png"
+                                alt="PhotoPackager app screenshot"
+                                className="relative w-full rounded-[1.3rem] border border-white/5 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
+                            />
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
             <section className="py-24 bg-black relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="mb-16 text-center max-w-4xl mx-auto">
                         <span className="text-xs font-bold text-sky-400 tracking-[0.2em] uppercase block mb-3">What the app does</span>
                         <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
-                            Repeatable delivery.
+                            Package Photoshoots for Client Download
                         </h2>
                         <p className="text-lg text-neutral-400 leading-relaxed">
                             Organize, convert, compress, and package without the handwork.
