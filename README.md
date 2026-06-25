@@ -1,3 +1,56 @@
+
+<!-- README-ROAST:START -->
+
+## README Roast Pass
+
+Roasted with [https://github.com/hidai25/readme-roast](https://github.com/hidai25/readme-roast) on 2026-06-25. This block is evidence-only: repo metadata, root files, and the existing README were scanned before writing.
+
+### Fast roast
+
+- Pre-pass README score: **82/100** by the readme-roast categories: first impression, install friction, trust, visuals, and structure.
+- No clear H1 hero near the top.
+- Biggest fix in this pass: added a Mermaid repo map plus a quick operator scan without deleting the existing README content.
+
+### Mermaid repository map
+
+```mermaid
+flowchart TD
+  R["DropShock-Digital/PhotoPackager"]
+  R --> N1["requirements.txt"]
+  R --> N2["Dockerfile"]
+  R --> N3["docker-compose.yml"]
+  R --> N4["README.md"]
+  R --> N5["assets/"]
+  R --> N6["cli/"]
+  R --> N7["frontend/"]
+  R --> N8["gui/"]
+  R --> N9["outputs/"]
+  R --> N10["release/"]
+  R --> N11["static/"]
+  R --> N12["temp_uploads/"]
+  R --> MORE["additional repo files"]
+```
+
+### Operator quick scan
+
+| Signal | Evidence |
+|---|---|
+| GitHub repo | [DropShock-Digital/PhotoPackager](https://github.com/DropShock-Digital/PhotoPackager) |
+| Description | Make Photoshoots Client Accessible |
+| Default branch | `main` |
+| Primary languages | Python 67%, TypeScript 24%, HTML 3%, Shell 2%, JavaScript 2% |
+| Install path | `python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt` |
+| Run/build hint | Not detected from root files |
+| Key files scanned | requirements.txt, Dockerfile, docker-compose.yml, README.md |
+
+### README next upgrades
+
+- Add real screenshots, GIFs, or CLI output once the repo has a stable demo path.
+- Pin exact setup commands after verifying them in a clean environment.
+- Link production/staging/docs only when the URL is durable and intended for readers.
+
+<!-- README-ROAST:END -->
+
 <div align="center">
   <img src="assets/PhotoPackager_Patch_Design_1024.png" alt="PhotoPackager Logo" width="400" style="margin-bottom:10px;"/>
   <h1>PhotoPackager</h1>
