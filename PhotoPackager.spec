@@ -7,6 +7,8 @@ from PyInstaller.utils.hooks import collect_data_files, collect_dynamic_libs
 from PyInstaller.utils.hooks import collect_all
 
 block_cipher = None
+project_root = os.path.dirname(os.path.abspath(__file__))
+app_icon = os.path.join(project_root, 'assets', 'PhotoPackager_Patch_Design.icns')
 
 # --- Pre-filter PIL data files --- 
 pil_pkg_dir = os.path.dirname(PIL.__file__)
@@ -37,7 +39,7 @@ added_files = []
 
 a = Analysis(
     ['app.py'],
-    pathex=[r'/Users/stevenseagondollar/Desktop/PhotoPackager'],
+    pathex=[project_root],
     binaries=[],
     datas=[('assets', 'assets')] + _filtered_pil_datas,
     hiddenimports=[
@@ -76,7 +78,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='/Users/stevenseagondollar/Desktop/PhotoPackager/assets/PhotoPackager_Patch_Design.icns',
+    icon=app_icon,
 )
 
 coll = COLLECT(
@@ -93,7 +95,7 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name='PhotoPackager.app',
-    icon='/Users/stevenseagondollar/Desktop/PhotoPackager/assets/PhotoPackager_Patch_Design.icns',
+    icon=app_icon,
     bundle_identifier='com.dropshockdigital.photopackager',
     info_plist={
         'CFBundleShortVersionString': '1.0.0', 
