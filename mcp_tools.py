@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 # Import shared components
 from schemas import JobSettings, JobResponse
 from worker import celery_app
-from config import TEMP_UPLOADS_DIR
+from config import MCP_SOURCE_ROOTS, TEMP_UPLOADS_DIR
 
 
 def _dump_job_settings(job_settings: JobSettings) -> dict:
@@ -31,13 +31,23 @@ async def package_photos(input: MCPPackagePhotosInput) -> JobResponse:
     job_id = str(uuid.uuid4())
     job_dir = TEMP_UPLOADS_DIR / job_id
 
+    if not MCP_SOURCE_ROOTS:
+        return JobResponse(
+            job_id=job_id,
+            status="failed",
+            message="MCP source roots are not configured."
+        )
+
     # 1. Create a unique directory for the job and copy files
     try:
         job_dir.mkdir(parents=True, exist_ok=True)
         for src_file in input.source_files:
-            if not src_file.is_file():
+            resolved_source = src_file.resolve()
+            if not any(resolved_source.is_relative_to(root) for root in MCP_SOURCE_ROOTS):
+                raise PermissionError(f"Source path is outside the configured MCP roots: {src_file}")
+            if not resolved_source.is_file():
                 raise FileNotFoundError(f"Source file not found: {src_file}")
-            shutil.copy(src_file, job_dir / src_file.name)
+            shutil.copy(resolved_source, job_dir / resolved_source.name)
     except Exception as e:
         # Cleanup if setup fails
         if job_dir.exists():

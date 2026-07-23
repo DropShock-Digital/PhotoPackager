@@ -50,6 +50,40 @@ def test_create_job_invalid_settings():
     
     assert response.status_code == 400
 
+
+def _valid_settings():
+    return {
+        "output_format": "JPEG", "output_quality": 85, "resize_enabled": False,
+        "max_width": 1920, "max_height": 1080, "strip_exif": True,
+        "watermark_enabled": False, "watermark_text": "", "skip_export": False,
+    }
+
+
+def test_create_job_rejects_too_many_files(monkeypatch):
+    import main
+    monkeypatch.setattr(main, "MAX_UPLOAD_FILES", 1)
+    response = client.post(
+        "/api/jobs",
+        data={"settings": json.dumps(_valid_settings())},
+        files=[("files", ("one.jpg", b"a", "image/jpeg")), ("files", ("two.jpg", b"b", "image/jpeg"))],
+    )
+    assert response.status_code == 413
+
+
+def test_create_job_rejects_oversized_file(monkeypatch):
+    import main
+    monkeypatch.setattr(main, "MAX_UPLOAD_FILE_BYTES", 2)
+    response = client.post(
+        "/api/jobs",
+        data={"settings": json.dumps(_valid_settings())},
+        files=[("files", ("large.jpg", b"abc", "image/jpeg"))],
+    )
+    assert response.status_code == 413
+
+
+def test_mcp_is_not_mounted_by_default():
+    assert all(getattr(route, "path", None) != "/mcp" for route in app.routes)
+
 def test_get_job_status():
     job_id = str(uuid.uuid4())
     response = client.get(f"/api/jobs/{job_id}/status")

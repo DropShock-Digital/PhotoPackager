@@ -3,10 +3,36 @@
 
 import os
 from pathlib import Path
-from typing import Set
+from typing import Set, Tuple
 
 OUTPUTS_DIR = Path("./outputs").resolve()
 TEMP_UPLOADS_DIR = Path("./temp_uploads").resolve()
+
+
+def _positive_int_env(name: str, default: int) -> int:
+    """Read a positive integer deployment limit without silently disabling it."""
+    value = int(os.getenv(name, str(default)))
+    if value < 1:
+        raise ValueError(f"{name} must be a positive integer")
+    return value
+
+
+def _csv_env(name: str) -> Tuple[str, ...]:
+    return tuple(item.strip() for item in os.getenv(name, "").split(",") if item.strip())
+
+
+# Public upload guardrails. Railway can override these per environment without a code change.
+MAX_UPLOAD_FILES = _positive_int_env("MAX_UPLOAD_FILES", 50)
+MAX_UPLOAD_FILE_BYTES = _positive_int_env("MAX_UPLOAD_FILE_BYTES", 100 * 1024 * 1024)
+MAX_UPLOAD_TOTAL_BYTES = _positive_int_env("MAX_UPLOAD_TOTAL_BYTES", 500 * 1024 * 1024)
+UPLOAD_CHUNK_BYTES = 1024 * 1024
+
+# MCP is disabled unless an operator deliberately enables it in a controlled environment.
+MCP_ENABLED = os.getenv("MCP_ENABLED", "false").strip().lower() in {"1", "true", "yes", "on"}
+MCP_SOURCE_ROOTS = tuple(Path(item).expanduser().resolve() for item in _csv_env("MCP_SOURCE_ROOTS"))
+
+# Set this to the exact production domain(s) to reject forged Host headers.
+TRUSTED_HOSTS = _csv_env("TRUSTED_HOSTS")
 
 TOOL_DISPLAY_NAME: str = "PhotoPackager"
 
