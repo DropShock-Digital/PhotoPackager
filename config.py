@@ -31,9 +31,6 @@ UPLOAD_CHUNK_BYTES = 1024 * 1024
 MCP_ENABLED = os.getenv("MCP_ENABLED", "false").strip().lower() in {"1", "true", "yes", "on"}
 MCP_SOURCE_ROOTS = tuple(Path(item).expanduser().resolve() for item in _csv_env("MCP_SOURCE_ROOTS"))
 
-# Set this to the exact production domain(s) to reject forged Host headers.
-TRUSTED_HOSTS = _csv_env("TRUSTED_HOSTS")
-
 TOOL_DISPLAY_NAME: str = "PhotoPackager"
 
 ORIGINAL_AUTHOR: str = "Steven Seagondollar, DropShock Digital LLC"
