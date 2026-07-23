@@ -1,87 +1,101 @@
-# PhotoPackager
+<p align="center">
+  <img src="assets/PhotoPackager_Patch.png" alt="PhotoPackager" width="220">
+</p>
 
-![Repo type](https://img.shields.io/badge/type-profile%20organization%20hub-0f172a) ![Status](https://img.shields.io/badge/status-prototype-2563eb) ![Docs](https://img.shields.io/badge/docs-rich%20README-7c3aed) ![Visibility](https://img.shields.io/badge/visibility-public-16a34a)
+<h1 align="center">PhotoPackager</h1>
 
-Make Photoshoots Client Accessible.
+<p align="center"><strong>Turn a folder of photos into organized, client-ready delivery packages.</strong></p>
 
-Built and maintained by **DropShock Digital**.
+<p align="center">
+  <a href="https://github.com/DropShock-Digital/PhotoPackager/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/DropShock-Digital/PhotoPackager/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-0ea5e9"></a>
+  <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white">
+  <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111827">
+</p>
 
----
+PhotoPackager automates the repetitive work between a finished shoot and a clean delivery. It can preserve originals, create optimized or compressed copies, apply an EXIF policy, and produce downloadable ZIP packages through a desktop workflow, command line, web interface, or MCP tools.
 
-## First screen
+> **Project status:** Public beta. The core packaging workflow is functional, but the interfaces and configuration may still change.
 
-| Area | Detail |
-| --- | --- |
-| Repository | [`DropShock-Digital/PhotoPackager`](https://github.com/DropShock-Digital/PhotoPackager) |
-| Primary class | profile / organization hub |
-| Current posture | prototype |
-| Default branch | `main` |
-| Visibility | public |
-| Last README standardization | 2026-06-26 |
+## What it does
 
-## What matters
+- Organizes a shoot into predictable delivery folders.
+- Creates JPG and WebP variants at configurable quality levels.
+- Preserves, selectively removes, or strips EXIF metadata.
+- Builds ZIP packages for client delivery.
+- Supports dry runs before writing output.
+- Offers CLI, FastAPI, Celery/Redis, React, and MCP entry points over the same packaging engine.
 
-- Make the repo purpose obvious in the first 30 seconds.
-- Put the architecture or workflow in a visual map before deep prose.
-- Keep commands, environment notes, and handoff risks close to the top.
-- Credit the real builder/maintainer while keeping client or project context separate from implementation notes.
-- Audit priority: `P0`
+PhotoPackager does **not** replace a DAM, gallery host, backup system, or delivery contract. It prepares files; you remain responsible for retaining originals and confirming the package before delivery.
 
-## System map
+## Quick start with Docker
 
-```mermaid
-flowchart TD
-    A["New repo / operator"] --> B["Template or hub"]
-    B --> C["Reusable standards"]
-    C --> D["Project-specific implementation"]
-    D --> E["Consistent handoff"]
-    B --> F["Examples + adoption notes"]
-```
-
-
-### Visual proof
-
-![Test Image](assets/Test_Image.JPG)
-
-![Windows App](assets/windows_app.png)
-
-![Hero](frontend/src/assets/hero.png)
-
-## Best features carried forward
-
-- Visual-first GitHub Markdown is kept, but constrained to one clear hero/asset lane.
-- Existing Mermaid thinking is preserved and moved near the top as the system map.
-- Existing setup intent is kept and reframed as a short operator path.
-- Architecture language is retained but converted into a skimmable diagram-first explanation.
-- Icon-rich scanning is retained where it helps readers move faster.
-
-## Operate this repo
-
-**Detected stack:** Python project metadata, Dockerfile, Docker Compose
+Docker is the simplest way to run the complete web workflow:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-docker build -t local-app .
+git clone https://github.com/DropShock-Digital/PhotoPackager.git
+cd PhotoPackager
 docker compose up --build
 ```
 
-> Commands above are inferred from repository files and should be verified before they become release or client handoff instructions.
+Open <http://localhost:5601>. The Compose stack runs the web/API service, Redis, and the background worker.
 
-## Documentation map
+## Local development
 
-- [`docker-compose.yml`](docker-compose.yml)
+### Backend and tests
 
-## Handoff notes
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt -r requirements-dev.txt
+python -m pytest -v
+```
 
-| Area | Detail |
+### Frontend
+
+```bash
+cd frontend
+npm ci
+npm run dev
+```
+
+### Command line
+
+```bash
+python photo_packager_cli.py --help
+```
+
+## Privacy and deployment
+
+Photo files may contain faces, locations, camera identifiers, and client information.
+
+- Run PhotoPackager locally when practical.
+- Generated packages and temporary uploads are intentionally excluded from Git.
+- Review EXIF settings and inspect every package before sharing it.
+- Keep originals outside PhotoPackager's output directory and in your normal backup system.
+- **Do not expose the included web/API service directly to the public internet.** It does not provide production-ready authentication, authorization, retention controls, or hardened multi-tenant isolation.
+
+If you deploy it for a team, put it in isolated infrastructure and add authentication, access controls, encrypted transport, storage lifecycle rules, monitoring, and backups.
+
+## Repository map
+
+| Path | Purpose |
 | --- | --- |
-| Secrets | No `.env.example` was detected; add one before documenting environment-specific setup. |
-| License | No license file detected in the repo scan. |
-| Owner credit | Built and maintained by DropShock Digital. |
-| Next documentation move | Add `docs/ARCHITECTURE.md` with the full system diagram and decisions. |
+| `photo_packager.py` | Core packaging workflow |
+| `photo_packager_cli.py` | Command-line interface |
+| `main.py` | FastAPI web/API entry point |
+| `worker.py` | Celery background worker |
+| `mcp_tools.py` | MCP-facing tools |
+| `frontend/` | React web interface |
+| `tests/` | Automated test suite |
 
-## Maintenance standard
+## Contributing
 
-This README follows the DropShock repo documentation format: one clear identity, one visual map, a short operator path, explicit ownership, and deeper detail moved into linked docs when needed. If the repo grows, add or update `docs/ARCHITECTURE.md`, `docs/DEPLOYMENT.md`, and `docs/OPERATIONS.md` instead of turning the README into a wall of text.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Please report security concerns through the process in [SECURITY.md](SECURITY.md), not in a public issue.
+
+## License
+
+PhotoPackager is available under the [MIT License](LICENSE).
+
+Built by [DropShock Digital](https://dropshockdigital.com) and Steven Seagondollar.
