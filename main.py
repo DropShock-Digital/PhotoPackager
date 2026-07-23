@@ -4,12 +4,22 @@ from pathlib import Path
 from typing import List
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 # Import shared components
 from worker import celery_app
-from config import OUTPUTS_DIR, TEMP_UPLOADS_DIR
+from config import (
+    MCP_ENABLED,
+    MAX_UPLOAD_FILES,
+    MAX_UPLOAD_FILE_BYTES,
+    MAX_UPLOAD_TOTAL_BYTES,
+    OUTPUTS_DIR,
+    TEMP_UPLOADS_DIR,
+    TRUSTED_HOSTS,
+    UPLOAD_CHUNK_BYTES,
+)
 from schemas import JobSettings, JobResponse
 
 # Import MCP Server components
@@ -18,9 +28,12 @@ from mcp_tools import get_tools
 
 app = FastAPI()
 
+if TRUSTED_HOSTS:
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=list(TRUSTED_HOSTS))
+
 STATIC_DIR = Path(__file__).parent / "frontend" / "dist"
 
-mcp_server = FastMCP(tools=get_tools())
+mcp_server = FastMCP(tools=get_tools()) if MCP_ENABLED else None
 
 # Ensure base directories exist
 TEMP_UPLOADS_DIR.mkdir(exist_ok=True)
@@ -42,6 +55,41 @@ def _dump_job_settings(job_settings: JobSettings) -> dict:
     if dumper is not None:
         return dumper()
     return job_settings.dict()
+
+
+async def _save_uploads(files: List[UploadFile], job_dir: Path) -> None:
+    """Write uploads with bounded file and aggregate sizes to protect disk and workers."""
+    if len(files) > MAX_UPLOAD_FILES:
+        raise HTTPException(status_code=413, detail=f"Too many files; maximum is {MAX_UPLOAD_FILES}.")
+
+    total_bytes = 0
+    for file in files:
+        if not file.filename:
+            await file.close()
+            continue
+
+        clean_filename = Path(file.filename).name
+        if not clean_filename or clean_filename in {".", ".."}:
+            await file.close()
+            continue
+
+        file_path = job_dir / clean_filename
+        file_bytes = 0
+        try:
+            with open(file_path, "wb") as buffer:
+                while chunk := await file.read(UPLOAD_CHUNK_BYTES):
+                    file_bytes += len(chunk)
+                    total_bytes += len(chunk)
+                    if file_bytes > MAX_UPLOAD_FILE_BYTES:
+                        raise HTTPException(status_code=413, detail="An uploaded file is too large.")
+                    if total_bytes > MAX_UPLOAD_TOTAL_BYTES:
+                        raise HTTPException(status_code=413, detail="The upload is too large.")
+                    buffer.write(chunk)
+        except Exception:
+            file_path.unlink(missing_ok=True)
+            raise
+        finally:
+            await file.close()
 
 def get_job_status(job_id: str):
     """Helper to get the status of a Celery task."""
@@ -85,17 +133,11 @@ async def create_packaging_job(
     job_dir = TEMP_UPLOADS_DIR / job_id
     job_dir.mkdir(parents=True, exist_ok=True)
 
-    # Save uploaded files
-    for file in files:
-        if not file.filename:
-            continue
-        # Strict sanitization: remove path components, get purely the filename.
-        clean_filename = Path(file.filename).name
-        if not clean_filename or clean_filename == '.' or clean_filename == '..':
-            continue
-        file_path = job_dir / clean_filename
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+    try:
+        await _save_uploads(files, job_dir)
+    except Exception:
+        shutil.rmtree(job_dir, ignore_errors=True)
+        raise
 
     # Launch background task with Celery
     celery_app.send_task(
@@ -142,7 +184,8 @@ async def download_zip_package(job_id: str, zip_filename: str):
 
 def _mount_runtime_apps() -> None:
     """Mount runtime sub-apps after API routes so they do not shadow /api."""
-    app.mount("/mcp", mcp_server)
+    if mcp_server is not None:
+        app.mount("/mcp", mcp_server)
     if STATIC_DIR.is_dir():
         app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="frontend")
 
