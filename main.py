@@ -4,7 +4,6 @@ from pathlib import Path
 from typing import List
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -17,7 +16,6 @@ from config import (
     MAX_UPLOAD_TOTAL_BYTES,
     OUTPUTS_DIR,
     TEMP_UPLOADS_DIR,
-    TRUSTED_HOSTS,
     UPLOAD_CHUNK_BYTES,
 )
 from schemas import JobSettings, JobResponse
@@ -27,9 +25,6 @@ from fastmcp import FastMCP
 from mcp_tools import get_tools
 
 app = FastAPI()
-
-if TRUSTED_HOSTS:
-    app.add_middleware(TrustedHostMiddleware, allowed_hosts=list(TRUSTED_HOSTS))
 
 STATIC_DIR = Path(__file__).parent / "frontend" / "dist"
 
