@@ -44,6 +44,16 @@ flowchart LR
 
 It is **not** a gallery host, backup system, client contract, or substitute for reviewing a package before delivery.
 
+## See the interface
+
+![PhotoPackager interface — local browser workflow with source-photo selection and packaging controls](assets/readme/photopackager-interface-local.png)
+
+This is a local, no-client-media fixture capture of the browser workflow. It shows the interface only; it does not prove a hosted deployment.
+
+## Hosted demo availability
+
+[PhotoPackager on the web](https://photopackager.dropshockdigital.com/) may be available without local setup. It is a cost-controlled hosted demo, not the recommended path for client media. Hosting may be paused when it is not actively maintained; if the URL returns a 404, email [support@dropshockdigital.com](mailto:support@dropshockdigital.com) to request that it be brought online.
+
 ## Try it locally
 
 ### Easiest browser path: run the container on your own computer
