@@ -9,7 +9,7 @@
 <p align="center">
   <a href="https://github.com/DropShock-Digital/PhotoPackager/actions/workflows/ci.yml"><img alt="CI workflow" src="https://github.com/DropShock-Digital/PhotoPackager/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-0ea5e9"></a>
-  <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white">
+  <img alt="Python 3.11+" src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white">
 </p>
 
 > **Review copy only.** This is a proposed replacement for `README.md` on branch `docs/readme-brand-draft`. It does not replace the primary README, existing official logo, or project visibility.
@@ -85,7 +85,7 @@ npm run build
 ### Command line
 
 ```bash
-python photo_packager_cli.py --help
+python app.py cli --help
 ```
 </details>
 
@@ -105,8 +105,8 @@ The included stack does not provide production-ready authentication, authorizati
 
 | Path | Role |
 | --- | --- |
-| `photo_packager.py` | Core packaging workflow |
-| `photo_packager_cli.py` | Command-line interface |
+| `job.py` and `image_processing.py` | Core packaging workflow |
+| `app.py` | Desktop/command-line launcher |
 | `main.py` | FastAPI web/API entry point |
 | `worker.py` | Celery background worker |
 | `mcp_tools.py` | MCP-facing tools |
