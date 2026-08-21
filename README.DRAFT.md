@@ -1,56 +1,52 @@
 # PhotoPackager
 
 <p align="center">
-  <img src="assets/readme/photopackager-banner-concept.png" alt="Illustrative PhotoPackager concept: an abstract aperture-and-package mark beside unlabeled archival photo sleeves and a sealed delivery packet." width="100%">
+  <img src="assets/PhotoPackager_Patch.png" alt="Official PhotoPackager patch: a stack of photos crossed by a blue lightning bolt." width="420">
 </p>
 
-<p align="center"><strong>Turn a folder of photos into organized, client-ready delivery packages.</strong></p>
+<p align="center"><strong>Turn a finished shoot into a clear, client-ready package — without manually sorting copies, exports, ZIPs, and metadata settings every time.</strong></p>
 
-<p align="center">
-  <a href="https://github.com/DropShock-Digital/PhotoPackager/actions/workflows/ci.yml"><img alt="CI workflow" src="https://github.com/DropShock-Digital/PhotoPackager/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-0ea5e9"></a>
-  <img alt="Python 3.11+" src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white">
-</p>
+> **Review copy only.** This proposed README lives on `docs/readme-brand-draft`. It does not replace `README.md`, change the official PhotoPackager logo, change project visibility, or make a deployment claim.
 
-> **Review copy only.** This is a proposed replacement for `README.md` on branch `docs/readme-brand-draft`. It does not replace the primary README, existing official logo, or project visibility.
+A photo delivery should not require rebuilding the same folder structure by hand after every shoot. PhotoPackager helps photographers turn a source folder into deliberate deliverables: preserved originals when wanted, optimized or compressed variants, an EXIF policy, readable folders, and ZIP packages for handoff.
 
-> **Visual concept:** The banner and embedded mark are original Codex-OAuth generated concepts. They are illustrative—not a product screenshot, client delivery, or official logo replacement—and remain review-only until approved.
+**Worth trying if:** you repeatedly prepare client photo deliveries and want a repeatable process that you can run on your own computer before sharing anything.
 
-PhotoPackager prepares a finished shoot for delivery. It can preserve originals, create optimized or compressed copies, apply an EXIF policy, and produce ZIP packages through desktop, command-line, web, or MCP entry points.
+## Choose the right way to run it
 
-> **Project status:** Public beta. The core packaging workflow is functional; interfaces and configuration may still change.
+| Use this | When you want | Where the photos are processed |
+| --- | --- | --- |
+| **Desktop / CLI** | The clearest privacy boundary and full local control | Your computer |
+| **Local Docker web app** | Browser convenience while keeping the service on your own computer | Your computer, at `localhost` |
+| **Current hosted web app** | A public browser test surface | **Server-side today** — files upload to the web/API service for processing and download |
 
-<table>
-<tr>
-<td width="50%" valign="top">
+> **Important:** the hosted web path is not browser-local processing today. Do not upload client media there unless you intentionally accept server-side upload, processing, and download. The public PhotoPackager URL was unavailable during the latest read-only check; this draft does not claim it is live.
 
-### It helps with
+```mermaid
+flowchart LR
+  A[Finished photo folder] --> B{Where do you run it?}
+  B -->|Desktop or CLI| C[PhotoPackager on your computer]
+  B -->|Docker web app at localhost| C
+  B -->|Hosted web app today| D[Upload to web/API service]
+  D --> E[Server-side worker]
+  C --> F[Local delivery folders and ZIPs]
+  E --> G[Download packaged ZIP]
+```
 
-- Predictable delivery folders
-- JPG and WebP variants
-- EXIF preserve/remove/strip policy
-- ZIP package creation
+## What it helps you deliver
+
+- Organized delivery folders instead of one loose export pile
+- Original, optimized JPG, WebP, and compressed variants when selected
+- EXIF preserve, remove, or strip choices
+- ZIP packages for the versions you decide to share
 - Dry runs before output is written
-- CLI, web, worker, and MCP paths over one engine
+- Desktop, command-line, local web, and MCP entry points over the same packaging engine
 
-</td>
-<td width="50%" valign="top">
+It is **not** a gallery host, backup system, client contract, or substitute for reviewing a package before delivery.
 
-### It does not replace
+## Try it locally
 
-- A digital asset manager
-- A gallery host
-- Your backup system
-- A delivery contract
-- Your review before client delivery
-
-</td>
-</tr>
-</table>
-
-## Start with the full local workflow
-
-**Requirements:** Docker for the simplest full web workflow.
+### Easiest browser path: run the container on your own computer
 
 ```bash
 git clone https://github.com/DropShock-Digital/PhotoPackager.git
@@ -58,22 +54,20 @@ cd PhotoPackager
 docker compose up --build
 ```
 
-Open <http://localhost:5601>. The Compose stack starts the web/API service, Redis, and the background worker.
+Then open <http://localhost:5601>. The browser talks to a service running on **your own computer**; the Compose stack starts the web/API service, Redis, and the background worker locally.
 
-<details>
-<summary><strong>Local development, CLI, and verification</strong></summary>
-
-### Backend and tests
+### Command line and verification
 
 ```bash
-python3.12 -m venv .venv
+python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt -r requirements-dev.txt
+python app.py cli --help
 python -m pytest -v
 ```
 
-### Frontend
+### Frontend development
 
 ```bash
 cd frontend
@@ -82,31 +76,24 @@ npm run lint
 npm run build
 ```
 
-### Command line
-
-```bash
-python app.py cli --help
-```
-</details>
-
-## Keep photo data private
+## Keep client media under your control
 
 Photo files can contain faces, locations, camera identifiers, and client information.
 
-- Run PhotoPackager locally when practical.
+- Prefer desktop, CLI, or the local Docker workflow for real client media.
+- Review EXIF settings and inspect every generated package before sharing it.
+- Keep originals outside the output directory and inside your normal backup system.
 - Generated packages and temporary uploads are intentionally excluded from Git.
-- Review EXIF settings and inspect every package before sharing it.
-- Keep originals outside the output directory and in your normal backup system.
-- Do **not** expose the included web/API service directly to the public Internet.
+- Do **not** treat the current web/API service as production-ready multi-tenant storage or a public client upload portal.
 
-The included stack does not provide production-ready authentication, authorization, multi-tenant isolation, or retention controls by default. Team deployment requires isolated infrastructure plus authentication, access controls, encrypted transport, storage lifecycle rules, monitoring, and backups.
+The included web stack does not provide production-ready authentication, authorization, multi-tenant isolation, retention controls, or a proven zero-retention policy by default. A hosted version needs a separate privacy, authentication, storage-lifecycle, cost, and deployment design before it should process client media.
 
-## Know where to look
+## How the repository is organized
 
 | Path | Role |
 | --- | --- |
 | `job.py` and `image_processing.py` | Core packaging workflow |
-| `app.py` | Desktop/command-line launcher |
+| `app.py` | Desktop and command-line launcher |
 | `main.py` | FastAPI web/API entry point |
 | `worker.py` | Celery background worker |
 | `mcp_tools.py` | MCP-facing tools |
